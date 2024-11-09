@@ -1,0 +1,27 @@
+{
+  "name": "photography-portfolio",
+  "type": "module",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/tailwind": "5",
+    "@fontsource/inter": "5",
+    "@fontsource/playfair-display": "5",
+    "aos": "2",
+    "astro": "4",
+    "masonry-layout": "4",
+    "photoswipe": "5",
+    "swiper": "11",
+    "tailwindcss": "3"
+  },
+  "devDependencies": {
+    "@types/aos": "^3.0.7"
+  }
+}

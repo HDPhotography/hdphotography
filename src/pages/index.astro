@@ -1,0 +1,271 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+const testimonials = [
+  {
+    name: "Emily & James",
+    event: "Wedding Photography",
+    image:
+      "https://images.unsplash.com/photo-1523419409543-a5e549c1faa8?w=100&h=100&fit=crop",
+    text: "Sarah captured our wedding day perfectly! Every time we look at our photos, we relive those beautiful moments.",
+  },
+  {
+    name: "David Chen",
+    event: "Corporate Event",
+    image:
+      "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop",
+    text: "Professional, creative, and incredibly talented. They made our company event look absolutely spectacular.",
+  },
+  {
+    name: "Sophie Williams",
+    event: "Portrait Session",
+    image:
+      "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop",
+    text: "The best portrait session I've ever had. They made me feel comfortable and the results were stunning.",
+  },
+  {
+    name: "The Martinez Family",
+    event: "Family Portraits",
+    image:
+      "https://images.unsplash.com/photo-1484688493527-670f98f9b195?w=100&h=100&fit=crop",
+    text: "They have a gift for capturing genuine moments. Our family photos are absolutely priceless.",
+  },
+];
+
+const stats = [
+  { number: "1000+", label: "Happy Clients" },
+  { number: "50+", label: "Awards Won" },
+  { number: "15+", label: "Years Experience" },
+  { number: "100K+", label: "Photos Delivered" },
+];
+---
+
+<Layout title="Professional Photography Portfolio">
+  <main>
+    <!-- Hero Section -->
+    <section class="relative h-screen">
+      <div class="swiper hero-swiper h-full">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide">
+            <img
+              src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=1920&h=1080&fit=crop"
+              alt="Wedding Photography"
+              class="w-full h-full object-cover"
+            />
+          </div>
+          <div class="swiper-slide">
+            <img
+              src="https://images.unsplash.com/photo-1537907690979-ee8e01276184?w=1920&h=1080&fit=crop"
+              alt="Portrait Photography"
+              class="w-full h-full object-cover"
+            />
+          </div>
+          <div class="swiper-slide">
+            <img
+              src="https://images.unsplash.com/photo-1519741497674-611481863552?w=1920&h=1080&fit=crop"
+              alt="Event Photography"
+              class="w-full h-full object-cover"
+            />
+          </div>
+        </div>
+      </div>
+      <div
+        class="absolute inset-0 bg-gradient-to-b from-transparent to-black/50 flex items-center justify-center z-[1]"
+      >
+        <div class="text-center text-white" data-aos="fade-up">
+          <h1 class="text-5xl md:text-7xl font-display mb-4">
+            Capturing Life's Beautiful Moments
+          </h1>
+          <p class="text-xl md:text-2xl">Professional Photography Services</p>
+        </div>
+      </div>
+    </section>
+    <!-- Stats Section -->
+    <section class="py-16 bg-primary-500">
+      <div class="container mx-auto px-6">
+        <div
+          class="grid grid-cols-2 md:grid-cols-4 gap-8 text-white text-center"
+        >
+          {
+            stats.map((stat) => (
+              <div data-aos="fade-up">
+                <div class="text-4xl font-bold mb-2">{stat.number}</div>
+                <div class="text-sm uppercase tracking-wider">{stat.label}</div>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+    <!-- Genres Section -->
+    <section class="py-20 bg-gray-50 dark:bg-gray-800">
+      <div class="container mx-auto px-6">
+        <h2
+          class="text-4xl font-display text-center mb-12 dark:text-white"
+          data-aos="fade-up"
+        >
+          Our Specialties
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <a href="/showroom?genre=wedding" class="group" data-aos="fade-up">
+            <div class="relative overflow-hidden rounded-lg">
+              <img
+                src="https://images.unsplash.com/photo-1519741497674-611481863552?w=800&h=600&fit=crop"
+                alt="Wedding"
+                class="w-full h-64 object-cover transform group-hover:scale-110 transition duration-500"
+              />
+              <div
+                class="absolute inset-0 bg-black/50 flex items-center justify-center"
+              >
+                <h3 class="text-2xl text-white font-display">Wedding</h3>
+              </div>
+            </div>
+          </a>
+          <a href="/showroom?genre=portrait" class="group" data-aos="fade-up">
+            <div class="relative overflow-hidden rounded-lg">
+              <img
+                src="https://images.unsplash.com/photo-1537907690979-ee8e01276184?w=800&h=600&fit=crop"
+                alt="Portrait"
+                class="w-full h-64 object-cover transform group-hover:scale-110 transition duration-500"
+              />
+              <div
+                class="absolute inset-0 bg-black/50 flex items-center justify-center"
+              >
+                <h3 class="text-2xl text-white font-display">Portrait</h3>
+              </div>
+            </div>
+          </a>
+          <a href="/showroom?genre=events" class="group" data-aos="fade-up">
+            <div class="relative overflow-hidden rounded-lg">
+              <img
+                src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=800&h=600&fit=crop"
+                alt="Events"
+                class="w-full h-64 object-cover transform group-hover:scale-110 transition duration-500"
+              />
+              <div
+                class="absolute inset-0 bg-black/50 flex items-center justify-center"
+              >
+                <h3 class="text-2xl text-white font-display">Events</h3>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+    <hr />
+    <!-- Process Section -->
+    <section class="py-20">
+      <div class="container mx-auto px-6">
+        <h2
+          class="text-4xl font-display text-center mb-12 dark:text-white"
+          data-aos="fade-up"
+        >
+          Our Process
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div class="text-center" data-aos="fade-up">
+            <div class="text-5xl mb-4">📞</div>
+            <h3 class="text-xl font-semibold mb-2 dark:text-white">
+              1. Consultation
+            </h3>
+            <p class="text-gray-600 dark:text-gray-300">
+              We discuss your vision and plan the perfect shoot
+            </p>
+          </div>
+          <div class="text-center" data-aos="fade-up" data-aos-delay="100">
+            <div class="text-5xl mb-4">📸</div>
+            <h3 class="text-xl font-semibold mb-2 dark:text-white">
+              2. Photo Session
+            </h3>
+            <p class="text-gray-600 dark:text-gray-300">
+              Professional photography with attention to detail
+            </p>
+          </div>
+          <div class="text-center" data-aos="fade-up" data-aos-delay="200">
+            <div class="text-5xl mb-4">✨</div>
+            <h3 class="text-xl font-semibold mb-2 dark:text-white">
+              3. Delivery
+            </h3>
+            <p class="text-gray-600 dark:text-gray-300">
+              Carefully edited photos delivered to you
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <hr />
+    <!-- Testimonials Section -->
+    <section class="py-20 bg-gray-50 dark:bg-gray-800">
+      <div class="container mx-auto px-6">
+        <h2
+          class="text-4xl font-display text-center mb-12 dark:text-white"
+          data-aos="fade-up"
+        >
+          Client Testimonials
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {
+            testimonials.map((testimonial) => (
+              <div
+                class="bg-white dark:bg-gray-900 p-6 rounded-lg shadow-lg"
+                data-aos="fade-up"
+              >
+                <div class="flex items-center mb-4">
+                  <img
+                    src={testimonial.image}
+                    alt={testimonial.name}
+                    class="w-12 h-12 rounded-full mr-4"
+                  />
+                  <div>
+                    <h4 class="font-semibold dark:text-white">
+                      {testimonial.name}
+                    </h4>
+                    <p class="text-sm text-gray-500 dark:text-gray-400">
+                      {testimonial.event}
+                    </p>
+                  </div>
+                </div>
+                <p class="text-gray-600 dark:text-gray-300">
+                  "{testimonial.text}"
+                </p>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20 bg-primary-500 text-white">
+      <div class="container mx-auto px-6 text-center">
+        <h2 class="text-4xl font-display mb-8" data-aos="fade-up">
+          Ready to Capture Your Special Moments?
+        </h2>
+        <p class="text-xl mb-8" data-aos="fade-up" data-aos-delay="100">
+          Let's create beautiful memories together
+        </p>
+        <a
+          href="/contact"
+          class="inline-block bg-white text-primary-500 px-8 py-3 rounded-full text-lg font-semibold hover:bg-gray-100 transition duration-300"
+          data-aos="fade-up"
+          data-aos-delay="200"
+        >
+          Book a Session
+        </a>
+      </div>
+    </section>
+  </main>
+</Layout>
+
+<script>
+  import Swiper from "swiper";
+  import { Autoplay, EffectFade } from "swiper/modules";
+  import "swiper/css";
+  import "swiper/css/effect-fade";
+
+  new Swiper(".hero-swiper", {
+    modules: [Autoplay, EffectFade],
+    effect: "fade",
+    loop: true,
+  });
+</script>

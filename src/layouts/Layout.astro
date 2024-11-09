@@ -1,0 +1,54 @@
+---
+import "@fontsource/playfair-display";
+import "@fontsource/inter";
+import Navbar from "../components/Navbar.astro";
+import Footer from "../components/Footer.astro";
+import { ViewTransitions } from "astro:transitions";
+
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content="Professional Photography Portfolio" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    <ViewTransitions />
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/photoswipe@5.4.3/dist/photoswipe.css"
+    />
+  </head>
+  <body class="bg-white dark:bg-gray-900 transition-colors duration-300">
+    <Navbar />
+    <slot />
+    <Footer />
+    <script>
+      import AOS from "aos";
+      AOS.init({
+        duration: 800,
+        once: true,
+      });
+    </script>
+    <script is:inline>
+      if (
+        localStorage.theme === "dark" ||
+        (!("theme" in localStorage) &&
+          window.matchMedia("(prefers-color-scheme: dark)").matches)
+      ) {
+        document.documentElement.classList.add("dark");
+      } else {
+        document.documentElement.classList.remove("dark");
+      }
+    </script>
+  </body>
+</html>
