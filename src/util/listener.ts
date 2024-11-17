@@ -1,11 +1,6 @@
-type OnLoadOptions = {
-  callback: () => void;
-  cleanup?: () => void;
-};
-
-export function on_load({ callback, cleanup }: OnLoadOptions) {
+export function on_load(callback: () => (() => void) | void) {
   function register() {
-    callback();
+    const cleanup = callback();
     if (cleanup) {
       document.addEventListener("astro:before-swap", cleanup, { once: true });
     }

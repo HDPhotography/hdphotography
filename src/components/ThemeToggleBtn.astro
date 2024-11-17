@@ -28,16 +28,11 @@
       document.documentElement.classList.contains("dark") ? "dark" : "light"
     );
   }
-  on_load({
-    callback() {
-      document
-        .getElementById("theme-toggle")
-        .addEventListener("click", on_theme_toggle);
-    },
-    cleanup() {
-      document
-        .getElementById("theme-toggle")
-        .removeEventListener("click", on_theme_toggle);
-    },
+  on_load(() => {
+    const themeToggle = document.getElementById("theme-toggle");
+    themeToggle.addEventListener("click", on_theme_toggle);
+    return () => {
+      themeToggle.removeEventListener("click", on_theme_toggle);
+    };
   });
 </script>

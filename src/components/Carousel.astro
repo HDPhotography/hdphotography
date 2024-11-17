@@ -168,88 +168,81 @@
 <script>
   import { on_load } from "../util/listener";
 
-  let currentIndex = 0;
-  const slides = document.querySelectorAll(".carousel-item");
-  const dots = document.querySelectorAll(".dot");
-  const wrapper = document.querySelector(".wrapper") as HTMLElement;
+  on_load(() => {
+    let currentIndex = 0;
+    const wrapper = document.querySelector(".wrapper") as HTMLElement;
+    const nextBtn = document.getElementById("next");
+    const prevBtn = document.getElementById("prev");
 
-  if (!wrapper) {
-    console.error("Wrapper element not found");
-  }
-  let slideTimeout: number;
+    const slides = document.querySelectorAll(".carousel-item");
+    const dots = document.querySelectorAll(".dot");
 
-  const totalSlides = slides.length;
+    if (!wrapper || !nextBtn || !prevBtn || !slides.length || !dots.length) {
+      return;
+    }
+    let slideTimeout: number;
 
-  const firstClone = slides[0].cloneNode(true);
-  const lastClone = slides[totalSlides - 1].cloneNode(true);
+    const totalSlides = slides.length;
 
-  wrapper.appendChild(firstClone);
-  wrapper.insertBefore(lastClone, slides[0]);
+    const firstClone = slides[0].cloneNode(true);
+    const lastClone = slides[totalSlides - 1].cloneNode(true);
 
-  wrapper.style.transform = `translateX(-100%)`;
+    wrapper.appendChild(firstClone);
+    wrapper.insertBefore(lastClone, slides[0]);
 
-  function updateDots() {
-    dots.forEach((dot, index) => {
-      dot.classList.toggle("active", index === currentIndex);
-    });
-  }
+    wrapper.style.transform = `translateX(-100%)`;
 
-  function showSlide(index = currentIndex + 1) {
-    wrapper.style.transition = "transform 0.5s ease-in-out";
-
-    if (index >= totalSlides) {
-      currentIndex = 0;
-      wrapper.style.transform = `translateX(${-100 * (totalSlides + 1)}%)`;
-      setTimeout(() => {
-        wrapper.style.transition = "none";
-        wrapper.style.transform = `translateX(-100%)`;
-      }, 500);
-    } else if (index < 0) {
-      currentIndex = totalSlides - 1;
-      wrapper.style.transform = "translateX(0%)";
-      setTimeout(() => {
-        wrapper.style.transition = "none";
-        wrapper.style.transform = `translateX(${-100 * totalSlides}%)`;
-      }, 500);
-    } else {
-      currentIndex = index;
-      wrapper.style.transform = `translateX(${-100 * (currentIndex + 1)}%)`;
+    function updateDots() {
+      dots.forEach((dot, index) => {
+        dot.classList.toggle("active", index === currentIndex);
+      });
     }
 
-    updateDots();
+    function showSlide(index = currentIndex + 1) {
+      wrapper.style.transition = "transform 0.5s ease-in-out";
 
-    clearTimeout(slideTimeout);
+      if (index >= totalSlides) {
+        currentIndex = 0;
+        wrapper.style.transform = `translateX(${-100 * (totalSlides + 1)}%)`;
+        setTimeout(() => {
+          wrapper.style.transition = "none";
+          wrapper.style.transform = `translateX(-100%)`;
+        }, 500);
+      } else if (index < 0) {
+        currentIndex = totalSlides - 1;
+        wrapper.style.transform = "translateX(0%)";
+        setTimeout(() => {
+          wrapper.style.transition = "none";
+          wrapper.style.transform = `translateX(${-100 * totalSlides}%)`;
+        }, 500);
+      } else {
+        currentIndex = index;
+        wrapper.style.transform = `translateX(${-100 * (currentIndex + 1)}%)`;
+      }
+
+      updateDots();
+
+      clearTimeout(slideTimeout);
+      slideTimeout = setInterval(() => showSlide(currentIndex + 1), 3000);
+    }
+
+    const next = () => showSlide(currentIndex + 1);
+    const prev = () => showSlide(currentIndex - 1);
+
+    nextBtn.addEventListener("click", next);
+    prevBtn.addEventListener("click", prev);
+    // Need to cleanup this listener
+    dots.forEach((dot, index) => {
+      dot.addEventListener("click", () => {
+        showSlide(index);
+      });
+    });
     slideTimeout = setInterval(() => showSlide(currentIndex + 1), 3000);
-  }
 
-  const next = () => showSlide(currentIndex + 1);
-  const prev = () => showSlide(currentIndex - 1);
-
-  on_load({
-    callback() {
-      const nextBtn = document.getElementById("next");
-      const prevBtn = document.getElementById("prev");
-      const dots = document.querySelectorAll(".dot");
-      if (nextBtn && prevBtn) {
-        nextBtn.addEventListener("click", next);
-        prevBtn.addEventListener("click", prev);
-        // Need to cleanup this listener
-        dots.forEach((dot, index) => {
-          dot.addEventListener("click", () => {
-            showSlide(index);
-          });
-        });
-        slideTimeout = setInterval(() => showSlide(currentIndex + 1), 3000);
-      }
-    },
-    cleanup() {
-      const nextBtn = document.getElementById("next");
-      const prevBtn = document.getElementById("prev");
-      if (nextBtn && prevBtn) {
-        document.getElementById("next").removeEventListener("click", next);
-        document.getElementById("prev").removeEventListener("click", prev);
-        clearTimeout(slideTimeout);
-      }
-    },
+    return () => {
+      document.getElementById("next").removeEventListener("click", next);
+      document.getElementById("prev").removeEventListener("click", prev);
+      clearTimeout(slideTimeout);
+    };
   });
 </script>

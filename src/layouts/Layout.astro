@@ -35,29 +35,27 @@ const { title } = Astro.props;
     <script>
       import AOS from "aos";
       import { on_load } from "../util/listener";
-      on_load({
-        callback() {
-          // init animate on scroll
-          AOS.init({
-            duration: 800,
-            once: true,
-          });
+      on_load(() => {
+        // init animate on scroll
+        AOS.init({
+          duration: 800,
+          once: true,
+        });
 
-          // setting theme
-          let preferredTheme = localStorage.getItem("theme");
-          if (preferredTheme == null) {
-            if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
-              preferredTheme = "dark";
-            } else {
-              preferredTheme = "light";
-            }
-          }
-          if (preferredTheme === "dark") {
-            document.documentElement.classList.add("dark");
+        // setting theme
+        let preferredTheme = localStorage.getItem("theme");
+        if (preferredTheme == null) {
+          if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+            preferredTheme = "dark";
           } else {
-            document.documentElement.classList.remove("dark");
+            preferredTheme = "light";
           }
-        },
+        }
+        if (preferredTheme === "dark") {
+          document.documentElement.classList.add("dark");
+        } else {
+          document.documentElement.classList.remove("dark");
+        }
       });
     </script>
   </body>
