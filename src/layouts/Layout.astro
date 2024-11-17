@@ -34,21 +34,33 @@ const { title } = Astro.props;
     <Footer />
     <script>
       import AOS from "aos";
-      AOS.init({
-        duration: 800,
-        once: true,
-      });
-    </script>
-    <script is:inline>
-      if (
-        localStorage.theme === "dark" ||
-        (!("theme" in localStorage) &&
-          window.matchMedia("(prefers-color-scheme: dark)").matches)
-      ) {
-        document.documentElement.classList.add("dark");
-      } else {
-        document.documentElement.classList.remove("dark");
+      function init_aos() {
+        AOS.init({
+          duration: 800,
+          once: true,
+        });
       }
+      document.addEventListener("astro:after-swap", init_aos);
+      init_aos();
+    </script>
+    <script>
+      function set_theme() {
+        let preferredTheme = localStorage.getItem("theme");
+        if (preferredTheme == null) {
+          if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+            preferredTheme = "dark";
+          } else {
+            preferredTheme = "light";
+          }
+        }
+        if (preferredTheme === "dark") {
+          document.documentElement.classList.add("dark");
+        } else {
+          document.documentElement.classList.remove("dark");
+        }
+      }
+      document.addEventListener("astro:after-swap", set_theme);
+      set_theme();
     </script>
   </body>
 </html>
