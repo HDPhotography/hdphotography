@@ -2,12 +2,30 @@
   <div class="wrapper">
     <div class="carousel-item active">
       <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=1920&h=1080&fit=crop" alt="Image 1">
+      <div class="carousel-text absolute inset-0 flex items-center justify-center text-center text-white" data-aos="fade-up">
+        <div>
+          <h1 class="text-5xl md:text-7xl font-display mb-4">Beautifu image</h1>
+          <p class="text-xl md:text-2xl">Description of a beautiful image</p>
+        </div>
+      </div>
     </div>
     <div class="carousel-item">
       <img src="https://images.unsplash.com/photo-1537907690979-ee8e01276184?w=1920&h=1080&fit=crop" alt="Image 2">
+      <div class="carousel-text absolute inset-0 flex items-center justify-center text-center text-white">
+        <div>
+          <h1 class="text-5xl md:text-7xl font-display mb-4">Good image</h1>
+          <p class="text-xl md:text-2xl">Description of a good image</p>
+        </div>
+      </div>
     </div>
     <div class="carousel-item">
       <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=1920&h=1080&fit=crop" alt="Image 3">
+      <div class="carousel-text absolute inset-0 flex items-center justify-center text-center text-white">
+        <div>
+          <h1 class="text-5xl md:text-7xl font-display mb-4">Idk</h1>
+          <p class="text-xl md:text-2xl">Idk what to put for the description</p>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -37,6 +55,13 @@
 
   .carousel-item {
     min-width: 100%;
+    position: relative;
+  }
+
+  .carousel-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
 
   .controls {
@@ -51,7 +76,6 @@
 
   .control-btn {
     background: rgba(0, 0, 0, 0.5);
-    position: absolute;
     border: none;
     color: white;
     padding: 10px;
@@ -69,13 +93,13 @@
   }
 
   .dots-wrapper {
-  position: absolute;
-  bottom: 20%;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  z-index: 10;
-}
+    position: absolute;
+    bottom: 20%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    z-index: 10;
+  }
 
   .dot {
     display: inline-block;
@@ -106,7 +130,6 @@
 <script>
   let currentIndex = 0
   const slides = document.querySelectorAll('.carousel-item')
-  // const wrapper = document.querySelector('.wrapper')
   const wrapper = document.querySelector('.wrapper') as HTMLElement
   const dots = document.querySelectorAll('.dot')
 
@@ -156,8 +179,8 @@
       updateDots()
     }
 
-    document.getElementById('next')?.addEventListener('click', () => showSlide(currentIndex + 1))
-    document.getElementById('prev')?.addEventListener('click', () => showSlide(currentIndex - 1))
+    document.getElementById('next').addEventListener('click', () => showSlide(currentIndex + 1))
+    document.getElementById('prev').addEventListener('click', () => showSlide(currentIndex - 1))
 
     dots.forEach((dot, index) => {
       dot.addEventListener('click', () => {
