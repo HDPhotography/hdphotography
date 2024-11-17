@@ -19,6 +19,8 @@
 </button>
 
 <script>
+  import { on_load } from "../util/listener";
+
   function on_theme_toggle() {
     document.documentElement.classList.toggle("dark");
     localStorage.setItem(
@@ -26,18 +28,16 @@
       document.documentElement.classList.contains("dark") ? "dark" : "light"
     );
   }
-
-  function register_toggle_btn() {
-    const themeToggle = document.getElementById("theme-toggle");
-    themeToggle.addEventListener("click", on_theme_toggle);
-    document.addEventListener(
-      "astro:before-swap",
-      () => {
-        themeToggle.removeEventListener("click", on_theme_toggle);
-      },
-      { once: true }
-    );
-  }
-  document.addEventListener("astro:after-swap", register_toggle_btn);
-  register_toggle_btn();
+  on_load({
+    callback() {
+      document
+        .getElementById("theme-toggle")
+        .addEventListener("click", on_theme_toggle);
+    },
+    cleanup() {
+      document
+        .getElementById("theme-toggle")
+        .removeEventListener("click", on_theme_toggle);
+    },
+  });
 </script>
