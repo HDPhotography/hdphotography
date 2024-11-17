@@ -1,8 +1,5 @@
----
-
----
-
-<div class="wrapper">
+<div class="carousel-container">
+  <div class="wrapper">
     <div class="carousel-item active">
       <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=1920&h=1080&fit=crop" alt="Image 1">
     </div>
@@ -13,63 +10,163 @@
       <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=1920&h=1080&fit=crop" alt="Image 3">
     </div>
   </div>
-  
-  <style>
-    .wrapper {
-      display: flex;
-      transition: transform 0.5s ease-in-out;
-    }
-  
+
+  <div class="controls">
+    <button id="prev" class="control-btn left">&#10094;</button>
+    <button id="next" class="control-btn right">&#10095;</button>
+  </div>
+
+  <div class="dots-wrapper">
+    <span class="dot active"></span>
+    <span class="dot"></span>
+    <span class="dot"></span>
+  </div>
+</div>
+
+<style>
+  .carousel-container {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .wrapper {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+  }
+
+  .carousel-item {
+    min-width: 100%;
+  }
+
+  .controls {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    transform: translateY(-50%);
+    z-index: 10;
+  }
+
+  .control-btn {
+    background: rgba(0, 0, 0, 0.5);
+    position: absolute;
+    border: none;
+    color: white;
+    padding: 10px;
+    cursor: pointer;
+    font-size: 24px;
+    z-index: 15;
+  }
+
+  .control-btn.left {
+    left: 10px;
+  }
+
+  .control-btn.right {
+    right: 10px;
+  }
+
+  .dots-wrapper {
+  position: absolute;
+  bottom: 20%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  z-index: 10;
+}
+
+  .dot {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    margin: 0 5px;
+    background-color: #ccc;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+
+  .dot.active {
+    background-color: #333;
+  }
+
+  @media (max-width: 800px) {
     .carousel-item {
-      min-width: 100%;
+      height: 100vh;
     }
-  
-    @media (max-width: 800px) {
-      .carousel-item {
-        height: 100vh;
-      }
-  
-      .carousel-item img {
-        height: 100%;
-        object-fit: cover;
-      }
+
+    .carousel-item img {
+      height: 100%;
+      object-fit: cover;
     }
-  </style>
-  
-  <script>
-    let currentIndex = 0;
-    const slides = document.querySelectorAll<HTMLElement>('.carousel-item');
-    const wrapper = document.querySelector<HTMLElement>('.wrapper');
-    
-    if (wrapper) {
-      const totalSlides = slides.length;
-  
-      const firstClone = slides[0].cloneNode(true);
-      const lastClone = slides[totalSlides - 1].cloneNode(true);
-  
-      wrapper.appendChild(firstClone);
-      wrapper.insertBefore(lastClone, slides[0]);
-  
-      wrapper.style.transform = `translateX(-100%)`;
-  
-      function showSlide() {
-        currentIndex++;
-        wrapper.style.transition = 'transform 0.5s ease-in-out';
-        wrapper.style.transform = `translateX(${-100 * (currentIndex + 1)}%)`;
-  
-        if (currentIndex === totalSlides) {
-          setTimeout(() => {
-            wrapper.style.transition = 'none';
-            currentIndex = 0;
-            wrapper.style.transform = `translateX(-100%)`;
-          }, 500);
-        }
-      }
-  
-      setInterval(showSlide, 3000);
-    } else {
-      console.error('Wrapper element not found');
+  }
+</style>
+
+<script>
+  let currentIndex = 0
+  const slides = document.querySelectorAll('.carousel-item')
+  // const wrapper = document.querySelector('.wrapper')
+  const wrapper = document.querySelector('.wrapper') as HTMLElement
+  const dots = document.querySelectorAll('.dot')
+
+  if (wrapper) {
+    const totalSlides = slides.length
+
+    const firstClone = slides[0].cloneNode(true)
+    const lastClone = slides[totalSlides - 1].cloneNode(true)
+
+    wrapper.appendChild(firstClone)
+    wrapper.insertBefore(lastClone, slides[0])
+
+    wrapper.style.transform = `translateX(-100%)`
+
+    function updateDots() {
+      dots.forEach((dot, index) => {
+        dot.classList.toggle('active', index === currentIndex)
+      })
     }
-  </script>
-  
-  
+
+    function showSlide(index = currentIndex + 1) {
+      if (index >= totalSlides) {
+        currentIndex = 0
+      } else if (index < 0) {
+        currentIndex = totalSlides - 1
+      } else {
+        currentIndex = index
+      }
+
+      wrapper.style.transition = 'transform 0.5s ease-in-out'
+      wrapper.style.transform = `translateX(${-100 * (currentIndex + 1)}%)`
+
+      if (index === totalSlides) {
+        setTimeout(() => {
+          wrapper.style.transition = 'none'
+          currentIndex = 0
+          wrapper.style.transform = `translateX(-100%)`
+        }, 500)
+      } else if (index === -1) {
+        setTimeout(() => {
+          wrapper.style.transition = 'none'
+          currentIndex = totalSlides - 1
+          wrapper.style.transform = `translateX(${-100 * totalSlides}%)`
+        }, 500)
+      }
+
+      updateDots()
+    }
+
+    document.getElementById('next')?.addEventListener('click', () => showSlide(currentIndex + 1))
+    document.getElementById('prev')?.addEventListener('click', () => showSlide(currentIndex - 1))
+
+    dots.forEach((dot, index) => {
+      dot.addEventListener('click', () => {
+        showSlide(index)
+      })
+    })
+
+    setInterval(() => showSlide(currentIndex + 1), 3000)
+  } else {
+    console.error('Wrapper element not found')
+  }
+</script>
