@@ -143,6 +143,7 @@
   const wrapper = document.querySelector('.wrapper') as HTMLElement
   const dots = document.querySelectorAll('.dot')
 
+  let isCooldown = false
   let slideTimeout
 
   if (wrapper) {
@@ -163,6 +164,9 @@
     }
 
     function showSlide(index = currentIndex + 1) {
+      if (isCooldown) return
+      isCooldown = true
+
       wrapper.style.transition = 'transform 0.5s ease-in-out'
 
       if (index >= totalSlides) {
@@ -185,9 +189,11 @@
       }
 
       updateDots()
-      
+
       clearTimeout(slideTimeout)
       slideTimeout = setInterval(() => showSlide(currentIndex + 1), 3000)
+
+      setTimeout(() => (isCooldown = false), 3000)
     }
 
     document.getElementById('next').addEventListener('click', () => showSlide(currentIndex + 1))
@@ -195,13 +201,16 @@
 
     dots.forEach((dot, index) => {
       dot.addEventListener('click', () => {
-        showSlide(index)
+        if (!isCooldown) {
+          showSlide(index)
+        }
       })
     })
 
-    slideTimeout = setInterval(() => showSlide(currentIndex + 1), 3000)
+    slideTimeout = setInterval(() => showSlide(currentIndex + 1), (1000 * 10))
   } else {
     console.error('Wrapper element not found')
   }
 </script>
+
 
