@@ -175,9 +175,7 @@
       currentIndex = index
       wrapper.style.transform = `translateX(${-100 * (currentIndex + 1)}%)`
     }
-
     updateDots()
-
     clearTimeout(slideTimeout)
     slideTimeout = setInterval(() => showSlide(currentIndex + 1), 10000)
 
