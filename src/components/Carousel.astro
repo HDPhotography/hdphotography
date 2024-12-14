@@ -1,5 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carousel with Cooldown</title>
+  <style>
+    .carousel-container {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+    }
+
+    .wrapper {
+      display: flex;
+      transition: transform 0.5s ease-in-out;
+    }
+
+    .carousel-item {
+      min-width: 100%;
+      position: relative;
+    }
+
+    .carousel-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .controls {
+      position: absolute;
+      top: 50%;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      transform: translateY(-50%);
+      z-index: 10;
+    }
+
+    .control-btn {
+      background: rgba(0, 0, 0, 0.5);
+      border: none;
+      color: white;
+      padding: 10px;
+      cursor: pointer;
+      font-size: 24px;
+      z-index: 15;
+    }
+
+    .control-btn.left {
+      left: 10px;
+    }
+
+    .control-btn.right {
+      right: 10px;
+    }
+
+    .dots-wrapper {
+      position: absolute;
+      bottom: 20%;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      z-index: 10;
+    }
+
+    .dot {
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      margin: 0 5px;
+      background-color: #ccc;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+
+    .dot.active {
+      background-color: #333;
+    }
+
+    @media (max-width: 800px) {
+      .carousel-item {
+        height: 100vh;
+      }
+
+      .carousel-item img {
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+  </style>
+</head>
+<body>
+
 <div class="carousel-container">
   <div class="wrapper">
+    <!-- Carousel items go here -->
     <div class="carousel-item active">
       <img
         src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=1920&h=1080&fit=crop"
@@ -16,7 +111,7 @@
         >
           <div>
             <h1 class="text-5xl md:text-7xl font-display mb-4">
-              Beautifu image
+              Beautiful image
             </h1>
             <p class="text-xl md:text-2xl">Description of a beautiful image</p>
           </div>
@@ -79,170 +174,99 @@
   </div>
 </div>
 
-<style>
-  .carousel-container {
-    position: relative;
-    width: 100%;
-    overflow: hidden;
-  }
-
-  .wrapper {
-    display: flex;
-    transition: transform 0.5s ease-in-out;
-  }
-
-  .carousel-item {
-    min-width: 100%;
-    position: relative;
-  }
-
-  .carousel-item img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
-  .controls {
-    position: absolute;
-    top: 50%;
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    transform: translateY(-50%);
-    z-index: 10;
-  }
-
-  .control-btn {
-    background: rgba(0, 0, 0, 0.5);
-    border: none;
-    color: white;
-    padding: 10px;
-    cursor: pointer;
-    font-size: 24px;
-    z-index: 15;
-  }
-
-  .control-btn.left {
-    left: 10px;
-  }
-
-  .control-btn.right {
-    right: 10px;
-  }
-
-  .dots-wrapper {
-    position: absolute;
-    bottom: 20%;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    z-index: 10;
-  }
-
-  .dot {
-    display: inline-block;
-    width: 10px;
-    height: 10px;
-    margin: 0 5px;
-    background-color: #ccc;
-    border-radius: 50%;
-    cursor: pointer;
-  }
-
-  .dot.active {
-    background-color: #333;
-  }
-
-  @media (max-width: 800px) {
-    .carousel-item {
-      height: 100vh;
-    }
-
-    .carousel-item img {
-      height: 100%;
-      object-fit: cover;
-    }
-  }
-</style>
-
 <script>
+  // Import a utility function for event listeners
   import { on_load } from "../util/listener";
 
   on_load(() => {
     let currentIndex = 0;
+    let cooldown = 0; // 500ms cooldown for rapid clicks
     const wrapper = document.querySelector(".wrapper") as HTMLElement;
-    const nextBtn = document.getElementById("next");
-    const prevBtn = document.getElementById("prev");
+    const nextBtn = document.getElementById("next")!;
+    const prevBtn = document.getElementById("prev")!;
 
     const slides = document.querySelectorAll(".carousel-item");
     const dots = document.querySelectorAll(".dot");
 
+    // Check if all necessary elements exist before continuing
     if (!wrapper || !nextBtn || !prevBtn || !slides.length || !dots.length) {
-      return;
+      return; // Exit if any element is missing
     }
-    let slideTimeout: number;
 
-    const totalSlides = slides.length;
+    let slideTimeout: number; //idk what this does
 
+    const totalSlides = slides.length; //same idk what this does too
+
+    // Clone the first and last slides for seamless looping
     const firstClone = slides[0].cloneNode(true);
     const lastClone = slides[totalSlides - 1].cloneNode(true);
 
-    wrapper.appendChild(firstClone);
-    wrapper.insertBefore(lastClone, slides[0]);
+    wrapper.appendChild(firstClone); // Append first clone at the end
+    wrapper.insertBefore(lastClone, slides[0]); // Insert last clone before the first slide
 
-    wrapper.style.transform = `translateX(-100%)`;
+    wrapper.style.transform = `translateX(-100%)`; // Initialize the carousel offscreen
 
+    // Update the active dot
     function updateDots() {
       dots.forEach((dot, index) => {
         dot.classList.toggle("active", index === currentIndex);
       });
     }
 
+    // Show the slide with index (ensures no cooldown break)
     function showSlide(index = currentIndex + 1) {
-      wrapper.style.transition = "transform 0.5s ease-in-out";
+      if (Date.now() - cooldown < 500) return; // Cooldown to prevent rapid clicks
+      cooldown = Date.now(); // Set the cooldown start time
+
+      wrapper.style.transition = "transform 0.5s ease-in-out"; // Apply the transition
 
       if (index >= totalSlides) {
         currentIndex = 0;
         wrapper.style.transform = `translateX(${-100 * (totalSlides + 1)}%)`;
         setTimeout(() => {
           wrapper.style.transition = "none";
-          wrapper.style.transform = `translateX(-100%)`;
-        }, 500);
+          wrapper.style.transform = `translateX(-100%)`; // Reset to normal position
+        }, 500); // Wait for transition to finish
       } else if (index < 0) {
         currentIndex = totalSlides - 1;
-        wrapper.style.transform = "translateX(0%)";
+        wrapper.style.transform = "translateX(0%)"; // Go to last clone position
         setTimeout(() => {
           wrapper.style.transition = "none";
-          wrapper.style.transform = `translateX(${-100 * totalSlides}%)`;
+          wrapper.style.transform = `translateX(${-100 * totalSlides}%)`; // Reset to first clone position
         }, 500);
       } else {
         currentIndex = index;
-        wrapper.style.transform = `translateX(${-100 * (currentIndex + 1)}%)`;
+        wrapper.style.transform = `translateX(${-100 * (currentIndex + 1)}%)`; // Move to next slide
       }
 
-      updateDots();
+      updateDots(); // Update the active dot
 
-      clearTimeout(slideTimeout);
-      slideTimeout = setInterval(() => showSlide(currentIndex + 1), 3000);
+      clearTimeout(slideTimeout); // Clear any previous timeouts
+      slideTimeout = setInterval(() => showSlide(currentIndex + 1), 10000); // Auto-slide every 3 seconds
     }
 
-    const next = () => showSlide(currentIndex + 1);
-    const prev = () => showSlide(currentIndex - 1);
+    const next = () => showSlide(currentIndex + 1); // Go to next slide
+    const prev = () => showSlide(currentIndex - 1); // Go to previous slide
 
-    nextBtn.addEventListener("click", next);
-    prevBtn.addEventListener("click", prev);
-    // Need to cleanup this listener
+    nextBtn.addEventListener("click", next); // Attach event listener for next button
+    prevBtn.addEventListener("click", prev); // Attach event listener for previous button
+
+    // Event listener for dots to navigate to specific slides
     dots.forEach((dot, index) => {
       dot.addEventListener("click", () => {
-        showSlide(index);
+        showSlide(index); // Show slide corresponding to the dot clicked
       });
     });
-    slideTimeout = setInterval(() => showSlide(currentIndex + 1), 3000);
+
+    slideTimeout = setInterval(() => showSlide(currentIndex + 1), 10000); // Start auto-sliding
 
     return () => {
-      document.getElementById("next").removeEventListener("click", next);
-      document.getElementById("prev").removeEventListener("click", prev);
-      clearTimeout(slideTimeout);
+      nextBtn.removeEventListener("click", next); // Cleanup on component unmount
+      prevBtn.removeEventListener("click", prev);
+      clearTimeout(slideTimeout); // Clear the slide timeout
     };
   });
 </script>
+
+</body>
+</html>
