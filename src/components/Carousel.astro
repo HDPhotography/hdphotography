@@ -1,74 +1,25 @@
-<section class="swiper">
-  <div class="swiper-wrapper h-[100vh]">
-    <div class="swiper-slide w-full h-[100vh]">
-      <img
-        src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=1920&h=1080&fit=crop"
-        alt="Image 1"
-      />
-      <div class="carousel-text absolute inset-0">
-        <div
-          class="absolute inset-0 bg-gradient-to-b from-transparent to-black/70"
-        >
-        </div>
-        <div
-          class="flex items-center justify-center text-center text-white h-full"
-          data-aos="fade-up"
-        >
-          <div>
-            <h1 class="text-5xl md:text-7xl font-display mb-4">
-              Beautiful image
-            </h1>
-            <p class="text-xl md:text-2xl">Description of a beautiful image</p>
-          </div>
-        </div>
-      </div>
-    </div>
+---
+import CarouselItem from "./CarouselItem.astro";
+---
 
-    <div class="swiper-slide w-full h-[100vh]">
-      <img
-        src="https://images.unsplash.com/photo-1537907690979-ee8e01276184?w=1920&h=1080&fit=crop"
-        alt="Image 2"
-      />
-      <div class="carousel-text absolute inset-0">
-        <div
-          class="absolute inset-0 bg-gradient-to-b from-transparent to-black/70"
-        >
-        </div>
-        <div
-          class="flex items-center justify-center text-center text-white h-full"
-        >
-          <div>
-            <h1 class="text-5xl md:text-7xl font-display mb-4">Good image</h1>
-            <p class="text-xl md:text-2xl">Description of a good image</p>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="swiper-slide w-full h-[100vh]">
-      <img
-        src="https://images.unsplash.com/photo-1519741497674-611481863552?w=1920&h=1080&fit=crop"
-        alt="Image 3"
-      />
-      <div class="carousel-text absolute inset-0">
-        <div
-          class="absolute inset-0 bg-gradient-to-b from-transparent to-black/70"
-        >
-        </div>
-        <div
-          class="flex items-center justify-center text-center text-white h-full"
-        >
-          <div>
-            <h1 class="text-5xl md:text-7xl font-display mb-4">Idk</h1>
-            <p class="text-xl md:text-2xl">
-              Idk what to put for the description
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
+<section class="swiper h-[calc(100svh-4rem)]">
+  <div class="swiper-wrapper">
+    <CarouselItem
+      title="Beautiful image"
+      description="Description of a beautiful image"
+      image="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=1920&h=1080&fit=crop"
+    />
+    <CarouselItem
+      title="Beautiful image"
+      description="Description of a beautiful image"
+      image="https://images.unsplash.com/photo-1537907690979-ee8e01276184?w=1920&h=1080&fit=crop"
+    />
+    <CarouselItem
+      title="Beautiful image"
+      description="Description of a beautiful image"
+      image="https://images.unsplash.com/photo-1519741497674-611481863552?w=1920&h=1080&fit=crop"
+    />
   </div>
-
   <div class="swiper-pagination"></div>
 
   <button class="swiper-button-prev"></button>
@@ -120,7 +71,9 @@
     border-radius: 50%;
     margin: var(--swiper-pagination-bullet-horizontal-gap)
       var(--swiper-pagination-bullet-vertical-gap);
-    transition: background-color 0.3s ease, transform 0.3s ease;
+    transition:
+      background-color 0.3s ease,
+      transform 0.3s ease;
   }
 
   .swiper-pagination-bullet-active {
