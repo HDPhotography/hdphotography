@@ -61,9 +61,10 @@
     const senderEmail = emailInput.value; 
     const message = messageInput.value; 
     const receiverEmail = 'joe@main.joe'; 
-    const subject = encodeURIComponent('Get in Touch'); 
+    const subject = encodeURIComponent('Get ou-'); 
     const body = encodeURIComponent(message); 
-    window.open(`https://mail.google.com/mail/u/0/?view=cm&fs=1&to=${receiverEmail}&su=${subject}&body=${body}&cc=${senderEmail}`, '_blank'); 
+    const mailtoLink = `mailto:${receiverEmail}?subject=${subject}&body=${body}&cc=${senderEmail}`;
+    window.open(mailtoLink, '_blank'); 
   }); 
 </script>
 
