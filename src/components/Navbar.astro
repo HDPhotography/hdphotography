@@ -11,11 +11,13 @@ import ThemeToggleBtn from "./ThemeToggleBtn.astro";
       <div class="hidden md:flex space-x-8">
         <a
           href="/"
+          onclick="event.preventDefault(); location.href='/'"
           class="text-gray-600 dark:text-gray-300 hover:text-primary-500"
           >Home</a
         >
         <a
           href="/about"
+          onclick="event.preventDefault(); location.href='/about'"
           class="text-gray-600 dark:text-gray-300 hover:text-primary-500"
           >About</a
         >
