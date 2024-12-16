@@ -128,66 +128,68 @@ const images = [
 </Layout>
 
 <script>
-  import PhotoSwipe from "photoswipe";
-  import "photoswipe/style.css";
+  // Select all filter buttons and gallery items
+  const filterBtns = document.querySelectorAll<HTMLButtonElement>(".filter-btn");
+  const items = document.querySelectorAll<HTMLElement>(".gallery-item");
 
-  // Filter functionality
-  const filterBtns = document.querySelectorAll(".filter-btn");
-  const items = document.querySelectorAll(".gallery-item");
-
-  filterBtns.forEach((btn) => {
-    btn.addEventListener("click", () => {
-      const filter = btn.getAttribute("data-filter");
-
-      filterBtns.forEach((b) => {
-        b.classList.remove("active", "bg-primary-500", "text-white");
-        b.classList.add(
+  // Function to apply the filter
+  const applyFilter = (filter: string) => {
+    // Update button styles
+    filterBtns.forEach((btn) => {
+      const btnFilter = btn.getAttribute("data-filter");
+      if (btnFilter === filter) {
+        btn.classList.add("active", "bg-primary-500", "text-white");
+        btn.classList.remove(
           "bg-gray-200",
           "dark:bg-gray-700",
           "text-gray-700",
           "dark:text-white"
         );
-      });
-
-      btn.classList.remove(
-        "bg-gray-200",
-        "dark:bg-gray-700",
-        "text-gray-700",
-        "dark:text-white"
-      );
-      btn.classList.add("active", "bg-primary-500", "text-white");
-
-      items.forEach((item: HTMLElement) => {
-        const category = item.getAttribute("data-category");
-        if (filter === "all" || category === filter) {
-          item.style.display = "block";
-          item.classList.remove("scale-0", "opacity-0");
-          item.classList.add("scale-100", "opacity-100");
-        } else {
-          item.classList.add("scale-0", "opacity-0");
-          setTimeout(() => {
-            item.style.display = "none";
-          }, 300);
-        }
-      });
+      } else {
+        btn.classList.remove("active", "bg-primary-500", "text-white");
+        btn.classList.add(
+          "bg-gray-200",
+          "dark:bg-gray-700",
+          "text-gray-700",
+          "dark:text-white"
+        );
+      }
     });
-  });
 
-  // Initialize PhotoSwipe
-  const images = document.querySelectorAll(".gallery-item img");
-  images.forEach((image) => {
-    image.addEventListener("click", (e) => {
-      const pswp = new PhotoSwipe({
-        gallery: ".gallery",
-        children: Array.from(images).map((img: HTMLImageElement) => ({
-          src: img.getAttribute("data-full"),
-          w: parseInt(img.getAttribute("data-width")),
-          h: parseInt(img.getAttribute("data-height")),
-          alt: img.alt,
-        })),
-        index: Array.from(images).indexOf(e.target as HTMLImageElement),
+    // Show/Hide gallery items based on filter
+    items.forEach((item) => {
+      const category = item.getAttribute("data-category");
+      if (filter === "all" || category === filter) {
+        item.style.display = "block"; // Ensure 'item' is treated as an HTMLElement
+        item.classList.remove("scale-0", "opacity-0");
+        item.classList.add("scale-100", "opacity-100");
+      } else {
+        item.classList.add("scale-0", "opacity-0");
+        setTimeout(() => {
+          item.style.display = "none"; // Same here
+        }, 300);
+      }
+    });
+  };
+
+  // Parse URL and apply filter based on 'genre' parameter
+  const applyFilterFromURL = () => {
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const filter = urlParams.get("genre") || "all"; // Default to 'all'
+    applyFilter(filter);
+  };
+
+  // Initialize filters on page load
+  window.addEventListener("DOMContentLoaded", () => {
+    applyFilterFromURL();
+
+    // Add event listeners to filter buttons
+    filterBtns.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const filter = btn.getAttribute("data-filter") || "all";
+        applyFilter(filter);
       });
-      pswp.init();
     });
   });
 </script>
