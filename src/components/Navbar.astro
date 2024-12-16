@@ -20,10 +20,10 @@ import ThemeToggleBtn from "./ThemeToggleBtn.astro";
           >About</a
         >
         <a
-          href="/showroom"
-          class="text-gray-600 dark:text-gray-300 hover:text-primary-500"
-          >Showroom</a
-        >
+        href="/showroom"
+        onclick="event.preventDefault(); location.href='/showroom'"
+        class="text-gray-600 dark:text-gray-300 hover:text-primary-500"
+        >Showroom</a>
       </div>
       <ThemeToggleBtn />
     </div>
