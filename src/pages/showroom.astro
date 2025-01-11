@@ -128,6 +128,7 @@ const images = [
 </Layout>
 
 <script>
+<<<<<<< Updated upstream
   import PhotoSwipe from "photoswipe";
   import "photoswipe/style.css";
 
@@ -142,11 +143,47 @@ const images = [
       filterBtns.forEach((b) => {
         b.classList.remove("active", "bg-primary-500", "text-white");
         b.classList.add(
+=======
+  import { on_load } from "../util/listener";
+
+  on_load(() => {
+    // Select all filter buttons and gallery items
+    const filterBtns =
+      document.querySelectorAll<HTMLButtonElement>(".filter-btn");
+    const items = document.querySelectorAll<HTMLElement>(".gallery-item");
+
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const filter = urlParams.get("genre") || "all"; // Default to 'all'
+
+    applyFilter(filter, filterBtns, items);
+
+    filterBtns.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        applyFilter(btn.getAttribute("data-filter"), filterBtns, items);
+      });
+    });
+  });
+
+  // Function to apply the filter
+  function applyFilter(
+    filter: string,
+    filterBtns: NodeListOf<HTMLButtonElement>,
+    items: NodeListOf<HTMLElement>,
+  ) {
+    // Update button styles
+    filterBtns.forEach((btn) => {
+      const btnFilter = btn.getAttribute("data-filter");
+      if (btnFilter === filter) {
+        btn.classList.add("active", "bg-primary-500", "text-white");
+        btn.classList.remove(
+>>>>>>> Stashed changes
           "bg-gray-200",
           "dark:bg-gray-700",
           "text-gray-700",
-          "dark:text-white"
+          "dark:text-white",
         );
+<<<<<<< Updated upstream
       });
 
       btn.classList.remove(
@@ -190,6 +227,39 @@ const images = [
       pswp.init();
     });
   });
+=======
+      } else {
+        btn.classList.remove("active", "bg-primary-500", "text-white");
+        btn.classList.add(
+          "bg-gray-200",
+          "dark:bg-gray-700",
+          "text-gray-700",
+          "dark:text-white",
+        );
+      }
+    });
+
+    // Show/Hide gallery items based on filter
+    items.forEach((item) => {
+      const category = item.getAttribute("data-category");
+      if (filter === "all" || category === filter) {
+        item.style.display = "block"; // Ensure 'item' is treated as an HTMLElement
+        item.classList.remove("scale-0", "opacity-0");
+        item.classList.add("scale-100", "opacity-100");
+      } else {
+        item.classList.add("scale-0", "opacity-0");
+        item.style.display = "none"; // Same here
+        // setTimeout(() => {
+        // }, 300);
+      }
+    });
+
+    const url = new URL(window.location.href);
+    url.searchParams.set("genre", filter);
+
+    window.history.pushState(null, "", url.toString());
+  }
+>>>>>>> Stashed changes
 </script>
 
 <style>
