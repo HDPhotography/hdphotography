@@ -128,22 +128,6 @@ const images = [
 </Layout>
 
 <script>
-<<<<<<< Updated upstream
-  import PhotoSwipe from "photoswipe";
-  import "photoswipe/style.css";
-
-  // Filter functionality
-  const filterBtns = document.querySelectorAll(".filter-btn");
-  const items = document.querySelectorAll(".gallery-item");
-
-  filterBtns.forEach((btn) => {
-    btn.addEventListener("click", () => {
-      const filter = btn.getAttribute("data-filter");
-
-      filterBtns.forEach((b) => {
-        b.classList.remove("active", "bg-primary-500", "text-white");
-        b.classList.add(
-=======
   import { on_load } from "../util/listener";
 
   on_load(() => {
@@ -177,57 +161,11 @@ const images = [
       if (btnFilter === filter) {
         btn.classList.add("active", "bg-primary-500", "text-white");
         btn.classList.remove(
->>>>>>> Stashed changes
           "bg-gray-200",
           "dark:bg-gray-700",
           "text-gray-700",
           "dark:text-white",
         );
-<<<<<<< Updated upstream
-      });
-
-      btn.classList.remove(
-        "bg-gray-200",
-        "dark:bg-gray-700",
-        "text-gray-700",
-        "dark:text-white"
-      );
-      btn.classList.add("active", "bg-primary-500", "text-white");
-
-      items.forEach((item: HTMLElement) => {
-        const category = item.getAttribute("data-category");
-        if (filter === "all" || category === filter) {
-          item.style.display = "block";
-          item.classList.remove("scale-0", "opacity-0");
-          item.classList.add("scale-100", "opacity-100");
-        } else {
-          item.classList.add("scale-0", "opacity-0");
-          setTimeout(() => {
-            item.style.display = "none";
-          }, 300);
-        }
-      });
-    });
-  });
-
-  // Initialize PhotoSwipe
-  const images = document.querySelectorAll(".gallery-item img");
-  images.forEach((image) => {
-    image.addEventListener("click", (e) => {
-      const pswp = new PhotoSwipe({
-        gallery: ".gallery",
-        children: Array.from(images).map((img: HTMLImageElement) => ({
-          src: img.getAttribute("data-full"),
-          w: parseInt(img.getAttribute("data-width")),
-          h: parseInt(img.getAttribute("data-height")),
-          alt: img.alt,
-        })),
-        index: Array.from(images).indexOf(e.target as HTMLImageElement),
-      });
-      pswp.init();
-    });
-  });
-=======
       } else {
         btn.classList.remove("active", "bg-primary-500", "text-white");
         btn.classList.add(
@@ -259,7 +197,6 @@ const images = [
 
     window.history.pushState(null, "", url.toString());
   }
->>>>>>> Stashed changes
 </script>
 
 <style>
