@@ -1,4 +1,4 @@
-<footer class="bg-gray-900 text-white py-12">
+<footer class="bg-white dark:bg-gray-900 text-black dark:text-white py-12">
   <div class="container mx-auto px-6">
     <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
       <!-- Contact Info -->
@@ -13,9 +13,21 @@
       <div>
         <h3 class="text-xl font-display mb-4">Quick Links</h3>
         <ul class="space-y-2">
-          <li><a href="/" class="hover:text-primary-500">Home</a></li>
-          <li><a href="/about" class="hover:text-primary-500">About</a></li>
-          <li><a href="/showroom" class="hover:text-primary-500">Showroom</a></li>
+          <li>
+            <a href="/" class="hover:text-gray-500 dark:hover:text-gray-400"
+              >Home</a>
+          </li>
+          <li>
+            <a
+              href="/about"
+              class="hover:text-gray-500 dark:hover:text-gray-400">About</a>
+          </li>
+          <li>
+            <a
+              href="/showroom"
+              class="hover:text-gray-500 dark:hover:text-gray-400">Showroom</a
+            >
+          </li>
         </ul>
       </div>
 
@@ -26,20 +38,19 @@
           <input
             type="email"
             placeholder="Your Email"
-            class="w-full px-4 py-2 rounded bg-gray-800 border border-gray-700 focus:outline-none focus:border-primary-500"
+            class="w-full px-4 py-2 rounded bg-gray-200 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 focus:outline-none focus:border-gray-500 dark:focus:border-gray-400"
             id="emailID"
             required
           />
           <textarea
             placeholder="Your Message"
             rows="4"
-            class="w-full px-4 py-2 rounded bg-gray-800 border border-gray-700 focus:outline-none focus:border-primary-500"
+            class="w-full px-4 py-2 rounded bg-gray-200 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 focus:outline-none focus:border-gray-500 dark:focus:border-gray-400"
             id="messageID"
-            required
-          ></textarea>
+            required></textarea>
           <button
             type="submit"
-            class="w-full bg-primary-500 text-white py-2 px-4 rounded hover:bg-primary-600 transition duration-300"
+            class="w-full bg-black dark:bg-white text-white dark:text-black py-2 px-4 rounded hover:bg-gray-800 dark:hover:bg-gray-300 transition duration-300"
           >
             Send Message
           </button>
@@ -47,25 +58,10 @@
       </div>
     </div>
 
-    <div class="mt-12 pt-8 border-t border-gray-800 text-center">
+    <div
+      class="mt-12 pt-8 border-t border-gray-300 dark:border-gray-700 text-center"
+    >
       <p>&copy; 2024 Lens & Light Photography. All rights reserved.</p>
     </div>
   </div>
 </footer>
-
-<script>
-  document.getElementById('contactForm').addEventListener('submit', function(e) { 
-    e.preventDefault(); 
-    const emailInput = document.getElementById('emailID') as HTMLInputElement; 
-    const messageInput = document.getElementById('messageID') as HTMLTextAreaElement; 
-    const senderEmail = emailInput.value; 
-    const message = messageInput.value; 
-    const receiverEmail = 'joe@main.joe'; 
-    const subject = encodeURIComponent('Get ou-'); 
-    const body = encodeURIComponent(message); 
-    const mailtoLink = `mailto:${receiverEmail}?subject=${subject}&body=${body}&cc=${senderEmail}`;
-    window.open(mailtoLink, '_blank'); 
-  }); 
-</script>
-
-

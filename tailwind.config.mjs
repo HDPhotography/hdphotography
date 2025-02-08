@@ -8,14 +8,11 @@ export default {
         display: ['Playfair Display', 'serif'],
         sans: ['Inter', 'sans-serif'],
       },
-      colors: {
-        primary: {
-          50: '#f5f3ff',
-          500: '#8b5cf6',
-          900: '#4c1d95',
-        },
+      backgroundImage: {
+        'red-gradient': 'linear-gradient(to right, #b00303, #6a0101)',
+        'gold-gradient': 'linear-gradient(to right, #c4a65d, #b0904a)',
       },
-    }
+    },
   },
   plugins: [],
 }

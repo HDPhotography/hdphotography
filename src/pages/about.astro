@@ -1,5 +1,5 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import Layout from "../layouts/Layout.astro";
 
 const team = [
   {
@@ -7,15 +7,19 @@ const team = [
     role: "Lead Photographer",
     image: "/images/sarah.jpg",
     bio: "With over 15 years of experience capturing life's precious moments, Sarah has developed a unique style that combines classical techniques with modern aesthetics. Her passion for photography began during her travels across Europe, where she discovered the power of visual storytelling.",
-    specialties: ["Wedding Photography", "Portrait Sessions", "Event Coverage"]
+    specialties: ["Wedding Photography", "Portrait Sessions", "Event Coverage"],
   },
   {
     name: "Michael Chen",
     role: "Creative Director",
     image: "/images/michael.jpg",
     bio: "Michael's artistic vision and technical expertise have helped shape our studio's distinctive style. His background in fine arts and digital media brings a fresh perspective to every shoot, ensuring each photo tells a compelling story.",
-    specialties: ["Artistic Direction", "Post-Processing", "Conceptual Photography"]
-  }
+    specialties: [
+      "Artistic Direction",
+      "Post-Processing",
+      "Conceptual Photography",
+    ],
+  },
 ];
 ---
 
@@ -24,17 +28,28 @@ const team = [
     <section class="py-20 bg-gray-50 dark:bg-gray-800">
       <div class="container mx-auto px-6">
         <div class="max-w-3xl mx-auto text-center">
-          <h1 class="text-4xl md:text-5xl font-display mb-8 dark:text-white" data-aos="fade-up">Our Story</h1>
-          <div class="prose dark:prose-invert mx-auto" data-aos="fade-up" data-aos-delay="100">
+          <h1
+            class="text-4xl md:text-5xl font-display mb-8 dark:text-white"
+            data-aos="fade-up"
+          >
+            Our Story
+          </h1>
+          <div
+            class="prose dark:prose-invert mx-auto"
+            data-aos="fade-up"
+            data-aos-delay="100"
+          >
             <p class="text-lg text-gray-600 dark:text-gray-300">
-              Founded in 2010, Lens & Light began as a dream to capture the world's beauty through a different lens. 
-              What started as a small studio in downtown has grown into a creative powerhouse, trusted by hundreds 
-              of clients to capture their most precious moments.
+              Founded in 2010, Lens & Light began as a dream to capture the
+              world's beauty through a different lens. What started as a small
+              studio in downtown has grown into a creative powerhouse, trusted
+              by hundreds of clients to capture their most precious moments.
             </p>
             <p class="text-lg text-gray-600 dark:text-gray-300 mt-4">
-              Our journey has been marked by countless weddings, celebrations, and intimate portraits, each 
-              contributing to our growing passion for visual storytelling. We believe that every moment deserves 
-              to be preserved in its most authentic and beautiful form.
+              Our journey has been marked by countless weddings, celebrations,
+              and intimate portraits, each contributing to our growing passion
+              for visual storytelling. We believe that every moment deserves to
+              be preserved in its most authentic and beautiful form.
             </p>
           </div>
         </div>
@@ -44,49 +59,81 @@ const team = [
     <!-- Team Section -->
     <section class="py-20">
       <div class="container mx-auto px-6">
-        {team.map((member) => (
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center mb-20" data-aos="fade-up">
-            <div class="relative">
-              <img src={member.image} alt={member.name} class="rounded-lg shadow-lg" />
-              <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent rounded-lg"></div>
-            </div>
-            <div>
-              <h2 class="text-3xl font-display mb-2 dark:text-white">{member.name}</h2>
-              <p class="text-primary-500 mb-6">{member.role}</p>
-              <p class="text-gray-600 dark:text-gray-300 mb-6">{member.bio}</p>
+        {
+          team.map((member) => (
+            <div
+              class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center mb-20"
+              data-aos="fade-up"
+            >
+              <div class="relative">
+                <img
+                  src={member.image}
+                  alt={member.name}
+                  class="rounded-lg shadow-lg"
+                />
+                <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent rounded-lg" />
+              </div>
               <div>
-                <h3 class="text-lg font-semibold mb-2 dark:text-white">Specialties:</h3>
-                <ul class="list-disc list-inside text-gray-600 dark:text-gray-300">
-                  {member.specialties.map((specialty) => (
-                    <li>{specialty}</li>
-                  ))}
-                </ul>
+                <h2 class="text-3xl font-display mb-2 dark:text-white">
+                  {member.name}
+                </h2>
+                <p class="text-primary-500 mb-6">{member.role}</p>
+                <p class="text-gray-600 dark:text-gray-300 mb-6">
+                  {member.bio}
+                </p>
+                <div>
+                  <h3 class="text-lg font-semibold mb-2 dark:text-white">
+                    Specialties:
+                  </h3>
+                  <ul class="list-disc list-inside text-gray-600 dark:text-gray-300">
+                    {member.specialties.map((specialty) => (
+                      <li>{specialty}</li>
+                    ))}
+                  </ul>
+                </div>
               </div>
             </div>
-          </div>
-        ))}
+          ))
+        }
       </div>
     </section>
 
     <!-- Awards Section -->
     <section class="py-20 bg-gray-50 dark:bg-gray-800">
       <div class="container mx-auto px-6">
-        <h2 class="text-4xl font-display text-center mb-12 dark:text-white" data-aos="fade-up">Recognition & Awards</h2>
+        <h2
+          class="text-4xl font-display text-center mb-12 dark:text-white"
+          data-aos="fade-up"
+        >
+          Recognition & Awards
+        </h2>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div class="text-center" data-aos="fade-up">
             <div class="text-primary-500 text-4xl mb-4">🏆</div>
-            <h3 class="text-xl font-semibold mb-2 dark:text-white">Best Wedding Photography</h3>
-            <p class="text-gray-600 dark:text-gray-300">Wedding Photography Awards 2023</p>
+            <h3 class="text-xl font-semibold mb-2 dark:text-white">
+              Best Wedding Photography
+            </h3>
+            <p class="text-gray-600 dark:text-gray-300">
+              Wedding Photography Awards 2023
+            </p>
           </div>
           <div class="text-center" data-aos="fade-up" data-aos-delay="100">
             <div class="text-primary-500 text-4xl mb-4">🎖️</div>
-            <h3 class="text-xl font-semibold mb-2 dark:text-white">Excellence in Portrait Photography</h3>
-            <p class="text-gray-600 dark:text-gray-300">International Portrait Society 2022</p>
+            <h3 class="text-xl font-semibold mb-2 dark:text-white">
+              Excellence in Portrait Photography
+            </h3>
+            <p class="text-gray-600 dark:text-gray-300">
+              International Portrait Society 2022
+            </p>
           </div>
           <div class="text-center" data-aos="fade-up" data-aos-delay="200">
             <div class="text-primary-500 text-4xl mb-4">🌟</div>
-            <h3 class="text-xl font-semibold mb-2 dark:text-white">Top 10 Photography Studios</h3>
-            <p class="text-gray-600 dark:text-gray-300">Professional Photography Magazine 2023</p>
+            <h3 class="text-xl font-semibold mb-2 dark:text-white">
+              Top 10 Photography Studios
+            </h3>
+            <p class="text-gray-600 dark:text-gray-300">
+              Professional Photography Magazine 2023
+            </p>
           </div>
         </div>
       </div>
