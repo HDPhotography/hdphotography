@@ -1,6 +1,5 @@
 ---
 import Carousel from "../components/Carousel.astro";
-
 import Layout from "../layouts/Layout.astro";
 
 const testimonials = [
@@ -44,10 +43,11 @@ const stats = [
 
 <Layout title="Professional Photography Portfolio">
   <Carousel />
+
   <!-- Stats Section -->
-  <section class="py-16 bg-primary-500">
+  <section class="py-16 bg-gradient-to-r from-[#b00303] to-[#6a0101] text-white">
     <div class="container mx-auto px-6">
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-white text-center">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
         {
           stats.map((stat) => (
             <div data-aos="fade-up">
@@ -59,108 +59,105 @@ const stats = [
       </div>
     </div>
   </section>
+
   <!-- Genres Section -->
-  <section class="py-20 bg-gray-50 dark:bg-gray-800">
+  <section class="py-20 bg-[#f5f0e6] dark:bg-gray-900">
     <div class="container mx-auto px-6">
       <h2
-        class="text-4xl font-display text-center mb-12 dark:text-white"
+        class="text-4xl font-display text-center mb-12 bg-gradient-to-r from-[#c4a65d] to-[#b0904a] bg-clip-text text-transparent"
         data-aos="fade-up"
       >
         Our Specialties
       </h2>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        <a href="/showroom?genre=wedding" class="group" data-aos="fade-up">
-          <div class="relative overflow-hidden rounded-lg">
-            <img
-              src="https://images.unsplash.com/photo-1519741497674-611481863552?w=800&h=600&fit=crop"
-              alt="Wedding"
-              class="w-full h-64 object-cover transform group-hover:scale-110 transition duration-500"
-            />
-            <div
-              class="absolute inset-0 bg-black/50 flex items-center justify-center"
-            >
-              <h3 class="text-2xl text-white font-display">Wedding</h3>
-            </div>
-          </div>
-        </a>
-        <a href="/showroom?genre=portrait" class="group" data-aos="fade-up">
-          <div class="relative overflow-hidden rounded-lg">
-            <img
-              src="https://images.unsplash.com/photo-1537907690979-ee8e01276184?w=800&h=600&fit=crop"
-              alt="Portrait"
-              class="w-full h-64 object-cover transform group-hover:scale-110 transition duration-500"
-            />
-            <div
-              class="absolute inset-0 bg-black/50 flex items-center justify-center"
-            >
-              <h3 class="text-2xl text-white font-display">Portrait</h3>
-            </div>
-          </div>
-        </a>
-        <a href="/showroom?genre=events" class="group" data-aos="fade-up">
-          <div class="relative overflow-hidden rounded-lg">
-            <img
-              src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=800&h=600&fit=crop"
-              alt="Events"
-              class="w-full h-64 object-cover transform group-hover:scale-110 transition duration-500"
-            />
-            <div
-              class="absolute inset-0 bg-black/50 flex items-center justify-center"
-            >
-              <h3 class="text-2xl text-white font-display">Events</h3>
-            </div>
-          </div>
-        </a>
+        {
+          [
+            {
+              href: "/showroom?genre=wedding",
+              src: "https://images.unsplash.com/photo-1519741497674-611481863552?w=800&h=600&fit=crop",
+              alt: "Wedding"
+            },
+            {
+              href: "/showroom?genre=portrait",
+              src: "https://images.unsplash.com/photo-1537907690979-ee8e01276184?w=800&h=600&fit=crop",
+              alt: "Portrait"
+            },
+            {
+              href: "/showroom?genre=events",
+              src: "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=800&h=600&fit=crop",
+              alt: "Events"
+            }
+          ].map(({ href, src, alt }) => (
+            <a href={href} class="group" data-aos="fade-up">
+              <div class="relative overflow-hidden rounded-lg shadow-lg border border-gradient-to-r from-[#c4a65d] to-[#b0904a]">
+                <img
+                  src={src}
+                  alt={alt}
+                  class="w-full h-64 object-cover transform group-hover:scale-110 group-hover:shadow-[0_0_15px_#b00303aa] transition duration-500"
+                />
+                <div
+                  class="absolute inset-0 bg-black/50 flex items-center justify-center"
+                >
+                  <h3 class="text-2xl text-white font-display">{alt}</h3>
+                </div>
+              </div>
+            </a>
+          ))
+        }
       </div>
     </div>
   </section>
-  <hr />
+
+  <hr class="border-t-2 border-gradient-to-r from-[#b00303] to-[#6a0101]" />
+
   <!-- Process Section -->
-  <section class="py-20">
+  <section class="py-20 bg-[#f1e8d6] dark:bg-gray-800">
     <div class="container mx-auto px-6">
       <h2
-        class="text-4xl font-display text-center mb-12 dark:text-white"
+        class="text-4xl font-display text-center mb-12 bg-gradient-to-r from-[#c4a65d] to-[#b0904a] bg-clip-text text-transparent"
         data-aos="fade-up"
       >
         Our Process
       </h2>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        <div class="text-center" data-aos="fade-up">
-          <div class="text-5xl mb-4">📞</div>
-          <h3 class="text-xl font-semibold mb-2 dark:text-white">
-            1. Consultation
-          </h3>
-          <p class="text-gray-600 dark:text-gray-300">
-            We discuss your vision and plan the perfect shoot
-          </p>
-        </div>
-        <div class="text-center" data-aos="fade-up" data-aos-delay="100">
-          <div class="text-5xl mb-4">📸</div>
-          <h3 class="text-xl font-semibold mb-2 dark:text-white">
-            2. Photo Session
-          </h3>
-          <p class="text-gray-600 dark:text-gray-300">
-            Professional photography with attention to detail
-          </p>
-        </div>
-        <div class="text-center" data-aos="fade-up" data-aos-delay="200">
-          <div class="text-5xl mb-4">✨</div>
-          <h3 class="text-xl font-semibold mb-2 dark:text-white">
-            3. Delivery
-          </h3>
-          <p class="text-gray-600 dark:text-gray-300">
-            Carefully edited photos delivered to you
-          </p>
-        </div>
+        {
+          [
+            {
+              icon: "📞",
+              title: "1. Consultation",
+              desc: "We discuss your vision and plan the perfect shoot"
+            },
+            {
+              icon: "📸",
+              title: "2. Photo Session",
+              desc: "Professional photography with attention to detail"
+            },
+            {
+              icon: "✨",
+              title: "3. Delivery",
+              desc: "Carefully edited photos delivered to you"
+            }
+          ].map(({ icon, title, desc }, i) => (
+            <div class="text-center" data-aos="fade-up" data-aos-delay={i * 100}>
+              <div class="text-5xl mb-4 ">
+                {icon}
+              </div>
+              <h3 class="text-xl font-semibold mb-2 text-[#6a0101] dark:text-white">{title}</h3>
+              <p class="text-[#5a4a36] dark:text-gray-300">{desc}</p>
+            </div>
+          ))
+        }
       </div>
     </div>
   </section>
-  <hr />
+
+  <hr class="border-t-2 border-gradient-to-r from-[#b00303] to-[#6a0101]" />
+
   <!-- Testimonials Section -->
-  <section class="py-20 bg-gray-50 dark:bg-gray-800">
+  <section class="py-20 bg-[#f5f0e6] dark:bg-gray-900">
     <div class="container mx-auto px-6">
       <h2
-        class="text-4xl font-display text-center mb-12 dark:text-white"
+        class="text-4xl font-display text-center mb-12 bg-gradient-to-r from-[#c4a65d] to-[#b0904a] bg-clip-text text-transparent"
         data-aos="fade-up"
       >
         Client Testimonials
@@ -169,7 +166,7 @@ const stats = [
         {
           testimonials.map((testimonial) => (
             <div
-              class="bg-white dark:bg-gray-900 p-6 rounded-lg shadow-lg"
+              class="bg-[#fffaf2] dark:bg-gray-800 p-6 rounded-lg shadow-md border border-gradient-to-r from-[#c4a65d] to-[#b0904a]"
               data-aos="fade-up"
             >
               <div class="flex items-center mb-4">
@@ -179,7 +176,7 @@ const stats = [
                   class="w-12 h-12 rounded-full mr-4"
                 />
                 <div>
-                  <h4 class="font-semibold dark:text-white">
+                  <h4 class="font-semibold text-[#b00303] dark:text-white">
                     {testimonial.name}
                   </h4>
                   <p class="text-sm text-gray-500 dark:text-gray-400">
@@ -187,7 +184,7 @@ const stats = [
                   </p>
                 </div>
               </div>
-              <p class="text-gray-600 dark:text-gray-300">
+              <p class="text-[#5a4a36] dark:text-gray-300">
                 "{testimonial.text}"
               </p>
             </div>
@@ -198,8 +195,8 @@ const stats = [
   </section>
 
   <!-- CTA Section -->
-  <section class="py-20 bg-primary-500 text-white">
-    <div class="container mx-auto px-6 text-center">
+  <section class="py-20 bg-gradient-to-r from-[#b00303] to-[#6a0101] text-white text-center">
+    <div class="container mx-auto px-6">
       <h2 class="text-4xl font-display mb-8" data-aos="fade-up">
         Ready to Capture Your Special Moments?
       </h2>
@@ -208,7 +205,7 @@ const stats = [
       </p>
       <a
         href="/contact"
-        class="inline-block bg-white text-primary-500 px-8 py-3 rounded-full text-lg font-semibold hover:bg-gray-100 transition duration-300"
+        class="inline-block bg-gradient-to-r from-[#c4a65d] to-[#b0904a] text-[#6a0101] px-8 py-3 rounded-full text-lg font-semibold hover:opacity-90 transition duration-300"
         data-aos="fade-up"
         data-aos-delay="200"
       >
