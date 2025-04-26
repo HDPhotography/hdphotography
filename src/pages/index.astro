@@ -45,7 +45,7 @@ const stats = [
   <Carousel />
 
   <!-- Stats Section -->
-  <section class="py-16 bg-gradient-to-r from-[#b00303] to-[#6a0101] text-white">
+  <section class="py-16 bg-gradient-to-r from-red to-darkRed text-white">
     <div class="container mx-auto px-6">
       <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
         {
@@ -61,10 +61,10 @@ const stats = [
   </section>
 
   <!-- Genres Section -->
-  <section class="py-20 bg-[#f5f0e6] dark:bg-gray-900">
+  <section class="py-20 bg-cream dark:bg-gray-900">
     <div class="container mx-auto px-6">
       <h2
-        class="text-4xl font-display text-center mb-12 bg-gradient-to-r from-[#c4a65d] to-[#b0904a] bg-clip-text text-transparent"
+        class="text-4xl font-display text-center mb-12 bg-gradient-to-r from-goldLight to-goldDark bg-clip-text text-transparent"
         data-aos="fade-up"
       >
         Our Specialties
@@ -89,7 +89,7 @@ const stats = [
             }
           ].map(({ href, src, alt }) => (
             <a href={href} class="group" data-aos="fade-up">
-              <div class="relative overflow-hidden rounded-lg shadow-lg border border-gradient-to-r from-[#c4a65d] to-[#b0904a]">
+              <div class="relative overflow-hidden rounded-lg shadow-lg border border-gradient-to-r from-goldLight to-goldDark">
                 <img
                   src={src}
                   alt={alt}
@@ -108,13 +108,13 @@ const stats = [
     </div>
   </section>
 
-  <hr class="border-t-2 border-gradient-to-r from-[#b00303] to-[#6a0101]" />
+  <hr class="border-t-2 border-gradient-to-r from-red to-darkRed" />
 
   <!-- Process Section -->
-  <section class="py-20 bg-[#f1e8d6] dark:bg-gray-800">
+  <section class="py-20 bg-beige dark:bg-gray-800">
     <div class="container mx-auto px-6">
       <h2
-        class="text-4xl font-display text-center mb-12 bg-gradient-to-r from-[#c4a65d] to-[#b0904a] bg-clip-text text-transparent"
+        class="text-4xl font-display text-center mb-12 bg-gradient-to-r from-goldLight to-goldDark bg-clip-text text-transparent"
         data-aos="fade-up"
       >
         Our Process
@@ -139,11 +139,11 @@ const stats = [
             }
           ].map(({ icon, title, desc }, i) => (
             <div class="text-center" data-aos="fade-up" data-aos-delay={i * 100}>
-              <div class="text-5xl mb-4 ">
+              <div class="text-5xl mb-4">
                 {icon}
               </div>
-              <h3 class="text-xl font-semibold mb-2 text-[#6a0101] dark:text-white">{title}</h3>
-              <p class="text-[#5a4a36] dark:text-gray-300">{desc}</p>
+              <h3 class="text-xl font-semibold mb-2 text-darkRed dark:text-white">{title}</h3>
+              <p class="text-brown dark:text-gray-300">{desc}</p>
             </div>
           ))
         }
@@ -151,13 +151,13 @@ const stats = [
     </div>
   </section>
 
-  <hr class="border-t-2 border-gradient-to-r from-[#b00303] to-[#6a0101]" />
+  <hr class="border-t-2 border-gradient-to-r from-red to-darkRed" />
 
   <!-- Testimonials Section -->
-  <section class="py-20 bg-[#f5f0e6] dark:bg-gray-900">
+  <section class="py-20 bg-cream dark:bg-gray-900">
     <div class="container mx-auto px-6">
       <h2
-        class="text-4xl font-display text-center mb-12 bg-gradient-to-r from-[#c4a65d] to-[#b0904a] bg-clip-text text-transparent"
+        class="text-4xl font-display text-center mb-12 bg-gradient-to-r from-goldLight to-goldDark bg-clip-text text-transparent"
         data-aos="fade-up"
       >
         Client Testimonials
@@ -166,7 +166,7 @@ const stats = [
         {
           testimonials.map((testimonial) => (
             <div
-              class="bg-[#fffaf2] dark:bg-gray-800 p-6 rounded-lg shadow-md border border-gradient-to-r from-[#c4a65d] to-[#b0904a]"
+              class="bg-ivory dark:bg-gray-800 p-6 rounded-lg shadow-md border border-gradient-to-r from-goldLight to-goldDark"
               data-aos="fade-up"
             >
               <div class="flex items-center mb-4">
@@ -176,7 +176,7 @@ const stats = [
                   class="w-12 h-12 rounded-full mr-4"
                 />
                 <div>
-                  <h4 class="font-semibold text-[#b00303] dark:text-white">
+                  <h4 class="font-semibold text-red dark:text-white">
                     {testimonial.name}
                   </h4>
                   <p class="text-sm text-gray-500 dark:text-gray-400">
@@ -184,7 +184,7 @@ const stats = [
                   </p>
                 </div>
               </div>
-              <p class="text-[#5a4a36] dark:text-gray-300">
+              <p class="text-brown dark:text-gray-300">
                 "{testimonial.text}"
               </p>
             </div>
@@ -195,7 +195,7 @@ const stats = [
   </section>
 
   <!-- CTA Section -->
-  <section class="py-20 bg-gradient-to-r from-[#b00303] to-[#6a0101] text-white text-center">
+  <section class="py-20 bg-gradient-to-r from-red to-darkRed text-white text-center">
     <div class="container mx-auto px-6">
       <h2 class="text-4xl font-display mb-8" data-aos="fade-up">
         Ready to Capture Your Special Moments?
@@ -205,7 +205,7 @@ const stats = [
       </p>
       <a
         href="/contact"
-        class="inline-block bg-gradient-to-r from-[#c4a65d] to-[#b0904a] text-[#6a0101] px-8 py-3 rounded-full text-lg font-semibold hover:opacity-90 transition duration-300"
+        class="inline-block bg-gradient-to-r from-goldLight to-goldDark text-darkRed px-8 py-3 rounded-full text-lg font-semibold hover:opacity-90 transition duration-300"
         data-aos="fade-up"
         data-aos-delay="200"
       >
