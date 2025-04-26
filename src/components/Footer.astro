@@ -1,21 +1,21 @@
-<footer class="bg-cream text-brown py-16">
+<footer class="bg-cream dark:bg-gray-800 text-brown py-16">
   <div class="container mx-auto px-6">
     <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
       <!-- Contact Info -->
       <div>
         <h3 class="text-xl font-display mb-4 text-goldDark">Contact Us</h3>
-        <p class="mb-2">📍 123 Photography Lane</p>
-        <p class="mb-2">📱 (555) 123-4567</p>
-        <p>📧 info@lensnlight.com</p>
+        <p class="mb-2 dark:text-gray-300">📱 +91 9884245583</p>
+        <p class="mb-2 dark:text-gray-300">📧 hdphotography.hdphoto@gmail.com</p>
+        <p class="mb-2 dark:text-gray-300">📍 Near E. B, Avadi road, Poonamallee</p>
       </div>
 
       <!-- Quick Links -->
       <div>
-        <h3 class="text-xl font-display mb-4 text-goldDark">Quick Links</h3>
+        <h3 class="text-xl font-display mb-4 text-goldDark">Social Media</h3>
         <ul class="space-y-2">
-          <li><a href="/" class="hover:text-goldLight transition">Home</a></li>
-          <li><a href="/about" class="hover:text-goldLight transition">About</a></li>
-          <li><a href="/showroom" class="hover:text-goldLight transition">Showroom</a></li>
+          <li><a href="https://www.instagram.com/__h.d_photography_" target="_blank" class="dark:text-gray-300">Instagram</a></li>
+          <li><a href="https://www.facebook.com/share/16PSds7WBP/" target="_blank" class="dark:text-gray-300">Facebook</a></li>
+          <li><a href="#" class="dark:text-gray-300">Twitter</a></li>
         </ul>
       </div>
 
@@ -47,8 +47,8 @@
       </div>
     </div>
 
-    <div class="mt-16 pt-8 border-t border-champagne text-center text-sm text-brown">
-      <p>&copy; 2024 Lens & Light Photography. All rights reserved.</p>
+    <div class="mt-16 pt-8 border-t border-champagne text-center text-sm text-brown dark:text-gray-300">
+      <p>&copy; 2021 HD Photography. All rights reserved.</p>
     </div>
   </div>
 </footer>
@@ -60,8 +60,8 @@
     const messageInput = document.getElementById('messageID') as HTMLTextAreaElement; 
     const senderEmail = emailInput.value; 
     const message = messageInput.value; 
-    const receiverEmail = 'joe@main.joe'; 
-    const subject = encodeURIComponent('Get ou-'); 
+    const receiverEmail = 'hdphotography.hdphoto@gmail.com'; 
+    const subject = encodeURIComponent("Hi HDPhotography, Let's work together!"); 
     const body = encodeURIComponent(message); 
     const mailtoLink = `mailto:${receiverEmail}?subject=${subject}&body=${body}&cc=${senderEmail}`;
     window.open(mailtoLink, '_blank'); 
