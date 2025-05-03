@@ -108,6 +108,8 @@ import ThemeToggleBtn from "./ThemeToggleBtn.astro";
 </div>
 
 <script>
+  import on_theme_toggle from "../util/on_theme_toggle.ts";
+
   document.addEventListener("DOMContentLoaded", function () {
     // Get references to UI elements
     const menuToggleBtn = document.getElementById("menuToggleBtn");
@@ -149,13 +151,9 @@ import ThemeToggleBtn from "./ThemeToggleBtn.astro";
       });
     });
 
-    // Toggle theme and store preference
+    // Toggle theme Event Listener, using on_theme_toggle function from util
     mobileThemeToggleBtn.addEventListener("click", function () {
-      document.documentElement.classList.toggle("dark");
-      localStorage.setItem(
-        "theme",
-        document.documentElement.classList.contains("dark") ? "dark" : "light"
-      );
+      on_theme_toggle();
     });
   });
 </script>
