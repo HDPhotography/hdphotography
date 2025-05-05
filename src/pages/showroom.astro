@@ -133,33 +133,36 @@ export const images = [
 
         <div
           id="lightbox"
-          class="fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center hidden"
+          class="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50 hidden"
         >
           <!-- Frame Container -->
           <div
-            class="relative bg-black rounded-lg shadow-xl w-[90vw] h-[90vw] sm:w-[80vw] sm:h-[80vh] max-w-[40rem] max-h-[80vh]"
+            id="lightboxFrame"
+            class="relative bg-white rounded-lg shadow-2xl border-4 border-white max-w-[90vw] max-h-[90vh] overflow-hidden transition-all duration-300"
           >
             <!-- Close Button -->
             <button
-              class="absolute top-2 right-2 text-white text-3xl font-semibold hover:text-gray-400 z-10"
+              class="absolute top-2 right-2 text-black text-3xl font-semibold hover:text-gray-500 z-10"
               id="lightboxCloseBtn"
             >
               &times;
             </button>
 
             <!-- Image Container -->
-            <div
-              class="w-full h-full flex justify-center items-center overflow-hidden rounded-md"
-            >
-              <!-- Image -->
-              <img src="" alt="" class="w-full h-full object-cover" />
+            <div class="flex justify-center items-center">
+              <img
+                id="lightboxImg"
+                src=""
+                alt=""
+                class="max-w-full max-h-[80vh] object-contain"
+              />
             </div>
 
             <!-- Description -->
             <div
-              class="absolute bottom-2 w-full text-center text-white font-semibold text-base bg-black bg-opacity-60 py-1"
+              class="w-full text-center text-black font-semibold text-base bg-white bg-opacity-80 py-2"
             >
-              <p>Placeholder</p>
+              <p id="lightboxDescription">Image</p>
             </div>
           </div>
         </div>
@@ -184,9 +187,9 @@ export const images = [
 
     const lightbox = document.getElementById("lightbox");
     const lightboxCloseBtn = document.getElementById("lightboxCloseBtn");
-    const lightboxImage = document
-      .getElementById("lightbox")
-      ?.getElementsByTagName("img")[0];
+    const lightboxImage = lightbox?.getElementsByTagName("img")[0];
+
+    const lightboxDescription = lightbox?.getElementsByTagName("p")[0];
 
     applyFilter(filter, filterBtns, items);
 
@@ -198,7 +201,7 @@ export const images = [
 
     items.forEach((image, index) => {
       image.addEventListener("click", () => {
-        openLightBox(index, lightbox, lightboxImage);
+        openLightBox(index, lightbox, lightboxImage, lightboxDescription);
       });
     });
 
@@ -207,18 +210,23 @@ export const images = [
     });
   });
 
-  function openLightBox(index, lightbox, lightboxImage) {
+  function openLightBox(index, lightbox, lightboxImage, lightboxDescription) {
     if (!lightboxImage) {
       console.error("Image element not found in the lightbox!");
       return;
     }
 
     let chosenImage = images.find((image) => image.id === index);
+    let chosenDescription = images.find((image) => image.id === index);
 
     if (chosenImage) {
       lightboxImage.src = chosenImage.src;
     } else {
       console.error("Image not found for index:", index);
+    }
+
+    if (chosenDescription) {
+      lightboxDescription.innerHTML = chosenDescription.description;
     }
 
     lightbox.classList.remove("hidden");
