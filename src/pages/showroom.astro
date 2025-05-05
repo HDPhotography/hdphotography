@@ -1,8 +1,9 @@
 ---
 import Layout from "../layouts/Layout.astro";
 
-const images = [
+export const images = [
   {
+    id: 0,
     src: "https://images.unsplash.com/photo-1519741497674-611481863552?w=800",
     category: "wedding",
     title: "Beach Wedding Ceremony",
@@ -12,6 +13,7 @@ const images = [
     height: 1280,
   },
   {
+    id: 1,
     src: "https://images.unsplash.com/photo-1537907690979-ee8e01276184?w=800",
     category: "portrait",
     title: "Golden Hour Portrait",
@@ -21,6 +23,7 @@ const images = [
     height: 1280,
   },
   {
+    id: 2,
     src: "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=800",
     category: "events",
     title: "Corporate Gala",
@@ -30,6 +33,7 @@ const images = [
     height: 1280,
   },
   {
+    id: 3,
     src: "https://images.unsplash.com/photo-1606800052052-a08af7148866?w=800",
     category: "wedding",
     title: "Garden Reception",
@@ -39,6 +43,7 @@ const images = [
     height: 1280,
   },
   {
+    id: 4,
     src: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=800",
     category: "portrait",
     title: "Studio Fashion",
@@ -50,7 +55,7 @@ const images = [
 ];
 ---
 
-<Layout title="Showroom - Professional Photography">
+<Layout title="Gallery - Professional Photography">
   <main class="pt-20 bg-ivory dark:bg-gray-700">
     <section class="py-12">
       <div class="container mx-auto px-6">
@@ -98,8 +103,11 @@ const images = [
           data-aos="fade-up"
         >
           {
-            images.map((image) => (
-              <div class="gallery-item" data-category={image.category}>
+            images.map((image, index) => (
+              <div
+                class="gallery-item cursor-pointer"
+                data-category={image.category}
+              >
                 <div class="relative group cursor-pointer overflow-hidden rounded-xl">
                   <img
                     src={image.src}
@@ -122,6 +130,48 @@ const images = [
             ))
           }
         </div>
+
+        <div
+          id="lightbox"
+          class="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50 hidden"
+        >
+          <!-- Frame Container -->
+          <div
+            class="relative bg-white rounded-lg shadow-2xl border-4 border-white max-w-[90vw] max-h-[90vh] overflow-hidden transition-all duration-300"
+          >
+            <!-- Close Button -->
+            <button
+              class="absolute top-2 right-2 text-black text-3xl font-semibold hover:text-gray-500 z-10"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+                class="size-5"
+              >
+                <path
+                  d="M6.28 5.22a.75.75 0 0 0-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 1 0 1.06 1.06L10 11.06l3.72 3.72a.75.75 0 1 0 1.06-1.06L11.06 10l3.72-3.72a.75.75 0 0 0-1.06-1.06L10 8.94 6.28 5.22Z"
+                ></path>
+              </svg>
+            </button>
+
+            <!-- Image Container -->
+            <div class="flex justify-center items-center">
+              <img
+                src=""
+                alt=""
+                class="max-w-full max-h-[80vh] object-contain"
+              />
+            </div>
+
+            <!-- Description -->
+            <div
+              class="w-full text-center text-black font-semibold text-base bg-white bg-opacity-80 py-2"
+            >
+              <p>Image</p>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   </main>
@@ -129,6 +179,7 @@ const images = [
 
 <script>
   import { on_load } from "../util/listener";
+  import { images } from "./showroom.astro";
 
   on_load(() => {
     // Select all filter buttons and gallery items
@@ -140,6 +191,12 @@ const images = [
     const urlParams = new URLSearchParams(queryString);
     const filter = urlParams.get("genre") || "all"; // Default to 'all'
 
+    // Light Box
+    const lightbox = document.getElementById("lightbox");
+    const lightboxCloseBtn = lightbox?.getElementsByTagName("button")[0];
+    const lightboxImage = lightbox?.getElementsByTagName("img")[0];
+    const lightboxDescription = lightbox?.getElementsByTagName("p")[0];
+
     applyFilter(filter, filterBtns, items);
 
     filterBtns.forEach((btn) => {
@@ -147,13 +204,47 @@ const images = [
         applyFilter(btn.getAttribute("data-filter"), filterBtns, items);
       });
     });
+
+    // Light box event
+    items.forEach((image, index) => {
+      image.addEventListener("click", () => {
+        openLightBox(index, lightbox, lightboxImage, lightboxDescription);
+      });
+    });
+
+    // Light box close event
+    lightboxCloseBtn.addEventListener("click", () => {
+      lightbox.classList.add("hidden");
+    });
   });
+
+  function openLightBox(index, lightbox, lightboxImage, lightboxDescription) {
+    if (!lightboxImage) {
+      console.error("Image element not found in the lightbox!");
+      return;
+    }
+
+    let chosenImage = images.find((image) => image.id === index);
+    let chosenDescription = images.find((image) => image.id === index);
+
+    if (chosenImage) {
+      lightboxImage.src = chosenImage.src;
+    } else {
+      console.error("Image not found for index:", index);
+    }
+
+    if (chosenDescription) {
+      lightboxDescription.innerHTML = chosenDescription.description;
+    }
+
+    lightbox.classList.remove("hidden");
+  }
 
   // Function to apply the filter
   function applyFilter(
     filter: string,
     filterBtns: NodeListOf<HTMLButtonElement>,
-    items: NodeListOf<HTMLElement>,
+    items: NodeListOf<HTMLElement>
   ) {
     // Update button styles
     filterBtns.forEach((btn) => {
@@ -164,7 +255,7 @@ const images = [
           "bg-champagne",
           "dark:bg-brown",
           "text-brown",
-          "dark:text-cream",
+          "dark:text-cream"
         );
       } else {
         btn.classList.remove("active", "bg-darkRed", "text-white");
@@ -172,7 +263,7 @@ const images = [
           "bg-champagne",
           "dark:bg-brown",
           "text-brown",
-          "dark:text-cream",
+          "dark:text-cream"
         );
       }
     });
