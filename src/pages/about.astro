@@ -3,22 +3,18 @@ import Layout from "../layouts/Layout.astro";
 
 const team = [
   {
-    name: "Sarah Anderson",
-    role: "Lead Photographer",
-    image: "/images/sarah.jpg",
-    bio: "With over 15 years of experience capturing life's precious moments, Sarah has developed a unique style that combines classical techniques with modern aesthetics. Her passion for photography began during her travels across Europe, where she discovered the power of visual storytelling.",
+    name: "Dinesh",
+    role: "Founder and CEO",
+    image: "dineshPic.jpg",
+    bio: "Dinesh is the creative force and visionary behind HDPhotography. With over a decade of experience behind the lens, he has transformed his lifelong passion for photography into a thriving business. Known for his keen eye, attention to detail, and ability to connect with clients, Dinesh brings both artistry and professionalism to every project. Under his leadership, HDPhotography has grown from a solo venture to a respected studio recognized for its distinctive style and uncompromising quality. Dinesh continues to push creative boundaries while mentoring a new generation of photographers.",
     specialties: ["Wedding Photography", "Portrait Sessions", "Event Coverage"],
   },
   {
-    name: "Michael Chen",
-    role: "Creative Director",
-    image: "/images/michael.jpg",
-    bio: "Michael's artistic vision and technical expertise have helped shape our studio's distinctive style. His background in fine arts and digital media brings a fresh perspective to every shoot, ensuring each photo tells a compelling story.",
-    specialties: [
-      "Artistic Direction",
-      "Post-Processing",
-      "Conceptual Photography",
-    ],
+    name: "Sanjay",
+    role: "Manager",
+    image: "sanjayPic.jpg",
+    bio: "Sanjay plays a vital role at HDPhotography as both the Studio Manager and Lead Photographer. As Dinesh’s right hand, Sanjay oversees day-to-day operations while also leading major photography projects. With a sharp artistic vision and years of experience behind the camera, Sanjay brings energy, precision, and creativity to every shoot. His ability to handle both creative direction and logistical execution makes him an invaluable part of the HDPhotography team, ensuring every client receives a seamless and exceptional experience.",
+    specialties: ["Management", "Creative Photographer", "Leadership"],
   },
 ];
 ---
@@ -41,16 +37,20 @@ const team = [
             data-aos-delay="100"
           >
             <p class="text-lg text-brown dark:text-gray-300">
-              Founded in 2021, HD Photography began as a dream to capture the
-              world's beauty through a different lens. What started as a small
-              studio in downtown has grown into a creative powerhouse, trusted
-              by hundreds of clients to capture their most precious moments.
+              At HD Photography, we don't just take pictures — we freeze time,
+              capture emotions, and turn every moment into a timeless story.
+              <br /><br />
+              \n\n Founded in Chennai, we specialize in wedding photography, blending
+              creativity and authenticity to deliver images that truly reflect your
+              most cherished memories. Whether it's a traditional wedding, candid
+              shoot, or a grand celebration, we ensure every detail is beautifully
+              preserved.
             </p>
             <p class="text-lg text-brown dark:text-gray-300 mt-4">
-              Our journey has been marked by countless weddings, celebrations,
-              and intimate portraits, each contributing to our growing passion
-              for visual storytelling. We believe that every moment deserves to
-              be preserved in its most authentic and beautiful form.
+              With a passionate team led by Dinesh, we bring a mix of artistry,
+              innovation, and dedication to every project. Our mission is simple
+              — to make your special moments unforgettable with high-quality
+              photography and a personalized touch.
             </p>
           </div>
         </div>
@@ -71,7 +71,7 @@ const team = [
                 <img
                   src={member.image}
                   alt={member.name}
-                  class="rounded-lg shadow-lg border-4 border-goldLight"
+                  class="rounded-lg shadow-lg border-4 border-goldLight w-min h-min"
                 />
                 <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent rounded-lg" />
               </div>

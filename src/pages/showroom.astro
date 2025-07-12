@@ -1,58 +1,8 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import { gallery } from "../data/gallery";
 
-export const images = [
-  {
-    id: 0,
-    src: "https://images.unsplash.com/photo-1519741497674-611481863552?w=800",
-    category: "wedding",
-    title: "Beach Wedding Ceremony",
-    description: "A beautiful sunset ceremony by the ocean",
-    full: "https://images.unsplash.com/photo-1519741497674-611481863552?w=1920",
-    width: 1920,
-    height: 1280,
-  },
-  {
-    id: 1,
-    src: "https://images.unsplash.com/photo-1537907690979-ee8e01276184?w=800",
-    category: "portrait",
-    title: "Golden Hour Portrait",
-    description: "Natural light portrait photography",
-    full: "https://images.unsplash.com/photo-1537907690979-ee8e01276184?w=1920",
-    width: 1920,
-    height: 1280,
-  },
-  {
-    id: 2,
-    src: "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=800",
-    category: "events",
-    title: "Corporate Gala",
-    description: "Annual tech conference keynote",
-    full: "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=1920",
-    width: 1920,
-    height: 1280,
-  },
-  {
-    id: 3,
-    src: "https://images.unsplash.com/photo-1606800052052-a08af7148866?w=800",
-    category: "wedding",
-    title: "Garden Reception",
-    description: "Intimate outdoor wedding celebration",
-    full: "https://images.unsplash.com/photo-1606800052052-a08af7148866?w=1920",
-    width: 1920,
-    height: 1280,
-  },
-  {
-    id: 4,
-    src: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=800",
-    category: "portrait",
-    title: "Studio Fashion",
-    description: "Professional studio portrait session",
-    full: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=1920",
-    width: 1280,
-    height: 1920,
-  },
-];
+const images = [...gallery.birthday, ...gallery.wedding, ...gallery.events];
 ---
 
 <Layout title="Gallery - Professional Photography">
@@ -77,24 +27,16 @@ export const images = [
           >
             All Work
           </button>
-          <button
-            class="filter-btn px-8 py-3 rounded-full bg-champagne dark:bg-brown text-brown dark:text-cream font-medium transition-all duration-300 hover:shadow-lg hover:scale-105"
-            data-filter="wedding"
-          >
-            Wedding
-          </button>
-          <button
-            class="filter-btn px-8 py-3 rounded-full bg-champagne dark:bg-brown text-brown dark:text-cream font-medium transition-all duration-300 hover:shadow-lg hover:scale-105"
-            data-filter="portrait"
-          >
-            Portrait
-          </button>
-          <button
-            class="filter-btn px-8 py-3 rounded-full bg-champagne dark:bg-brown text-brown dark:text-cream font-medium transition-all duration-300 hover:shadow-lg hover:scale-105"
-            data-filter="events"
-          >
-            Events
-          </button>
+          {
+            Object.keys(gallery).map((cat) => (
+              <button
+                class="filter-btn px-8 py-3 rounded-full bg-champagne dark:bg-brown text-brown dark:text-cream font-medium transition-all duration-300 hover:shadow-lg hover:scale-105"
+                data-filter={cat}
+              >
+                {cat.charAt(0).toUpperCase() + cat.slice(1)}
+              </button>
+            ))
+          }
         </div>
 
         <!-- Gallery -->
@@ -135,11 +77,9 @@ export const images = [
           id="lightbox"
           class="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50 hidden"
         >
-          <!-- Frame Container -->
           <div
             class="relative bg-white rounded-lg shadow-2xl border-4 border-white max-w-[90vw] max-h-[90vh] overflow-hidden transition-all duration-300"
           >
-            <!-- Close Button -->
             <button
               class="absolute top-2 right-2 text-black text-3xl font-semibold hover:text-gray-500 z-10"
             >
@@ -155,7 +95,6 @@ export const images = [
               </svg>
             </button>
 
-            <!-- Image Container -->
             <div class="flex justify-center items-center">
               <img
                 src=""
@@ -164,7 +103,6 @@ export const images = [
               />
             </div>
 
-            <!-- Description -->
             <div
               class="w-full text-center text-black font-semibold text-base bg-white bg-opacity-80 py-2"
             >
@@ -179,23 +117,19 @@ export const images = [
 
 <script>
   import { on_load } from "../util/listener";
-  import { images } from "./showroom.astro";
 
   on_load(() => {
-    // Select all filter buttons and gallery items
-    const filterBtns =
-      document.querySelectorAll<HTMLButtonElement>(".filter-btn");
-    const items = document.querySelectorAll<HTMLElement>(".gallery-item");
+    const filterBtns = document.querySelectorAll(".filter-btn");
+    const items = document.querySelectorAll(".gallery-item");
 
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
-    const filter = urlParams.get("genre") || "all"; // Default to 'all'
+    const filter = urlParams.get("genre") || "all";
 
-    // Light Box
     const lightbox = document.getElementById("lightbox");
-    const lightboxCloseBtn = lightbox?.getElementsByTagName("button")[0];
-    const lightboxImage = lightbox?.getElementsByTagName("img")[0];
-    const lightboxDescription = lightbox?.getElementsByTagName("p")[0];
+    const lightboxCloseBtn = lightbox?.querySelector("button");
+    const lightboxImage = lightbox?.querySelector("img");
+    const lightboxDescription = lightbox?.querySelector("p");
 
     applyFilter(filter, filterBtns, items);
 
@@ -205,48 +139,24 @@ export const images = [
       });
     });
 
-    // Light box event
     items.forEach((image, index) => {
       image.addEventListener("click", () => {
-        openLightBox(index, lightbox, lightboxImage, lightboxDescription);
+        const imgEl = image.querySelector("img");
+        if (!imgEl) return;
+
+        lightboxImage.src = imgEl.getAttribute("src");
+        lightboxDescription.innerHTML =
+          image.querySelector("p")?.textContent || "Image";
+        lightbox.classList.remove("hidden");
       });
     });
 
-    // Light box close event
     lightboxCloseBtn.addEventListener("click", () => {
       lightbox.classList.add("hidden");
     });
   });
 
-  function openLightBox(index, lightbox, lightboxImage, lightboxDescription) {
-    if (!lightboxImage) {
-      console.error("Image element not found in the lightbox!");
-      return;
-    }
-
-    let chosenImage = images.find((image) => image.id === index);
-    let chosenDescription = images.find((image) => image.id === index);
-
-    if (chosenImage) {
-      lightboxImage.src = chosenImage.src;
-    } else {
-      console.error("Image not found for index:", index);
-    }
-
-    if (chosenDescription) {
-      lightboxDescription.innerHTML = chosenDescription.description;
-    }
-
-    lightbox.classList.remove("hidden");
-  }
-
-  // Function to apply the filter
-  function applyFilter(
-    filter: string,
-    filterBtns: NodeListOf<HTMLButtonElement>,
-    items: NodeListOf<HTMLElement>
-  ) {
-    // Update button styles
+  function applyFilter(filter, filterBtns, items) {
     filterBtns.forEach((btn) => {
       const btnFilter = btn.getAttribute("data-filter");
       if (btnFilter === filter) {
@@ -268,24 +178,20 @@ export const images = [
       }
     });
 
-    // Show/Hide gallery items based on filter
     items.forEach((item) => {
       const category = item.getAttribute("data-category");
       if (filter === "all" || category === filter) {
-        item.style.display = "block"; // Ensure 'item' is treated as an HTMLElement
+        item.style.display = "block";
         item.classList.remove("scale-0", "opacity-0");
         item.classList.add("scale-100", "opacity-100");
       } else {
         item.classList.add("scale-0", "opacity-0");
-        item.style.display = "none"; // Same here
-        // setTimeout(() => {
-        // }, 300);
+        item.style.display = "none";
       }
     });
 
     const url = new URL(window.location.href);
     url.searchParams.set("genre", filter);
-
     window.history.pushState(null, "", url.toString());
   }
 </script>

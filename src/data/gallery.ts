@@ -1,0 +1,150 @@
+export const gallery: Record<
+  string,
+  {
+    id: string;
+    src: string;
+    full: string;
+    category: string;
+    title: string;
+    description: string;
+    width: number;
+    height: number;
+  }[]
+> = {
+  birthday: [
+    {
+      id: "birthday-1",
+      src: "/gallery_images/birthday/birthday_1.JPG",
+      full: "/gallery_images/birthday/birthday_1.JPG",
+      category: "birthday",
+      title: "Birthday Image 1",
+      description: "An image from the birthday collection.",
+      width: 1920,
+      height: 1280,
+    },
+    {
+      id: "birthday-2",
+      src: "/gallery_images/birthday/Birthday_2.JPG",
+      full: "/gallery_images/birthday/Birthday_2.JPG",
+      category: "birthday",
+      title: "Birthday Image 2",
+      description: "An image from the birthday collection.",
+      width: 1920,
+      height: 1280,
+    },
+    {
+      id: "birthday-3",
+      src: "/gallery_images/birthday/Birthday_3.JPG",
+      full: "/gallery_images/birthday/Birthday_3.JPG",
+      category: "birthday",
+      title: "Birthday Image 3",
+      description: "An image from the birthday collection.",
+      width: 1920,
+      height: 1280,
+    },
+    {
+      id: "birthday-4",
+      src: "/gallery_images/birthday/Birthday_4.JPG",
+      full: "/gallery_images/birthday/Birthday_4.JPG",
+      category: "birthday",
+      title: "Birthday Image 3",
+      description: "An image from the birthday collection.",
+      width: 1920,
+      height: 1280,
+    },
+    {
+      id: "birthday-5",
+      src: "/gallery_images/birthday/Birthday_5.JPG",
+      full: "/gallery_images/birthday/Birthday_5.JPG",
+      category: "birthday",
+      title: "Birthday Image 3",
+      description: "An image from the birthday collection.",
+      width: 1920,
+      height: 1280,
+    },
+  ],
+  wedding: [
+    {
+      id: "wedding-1",
+      src: "/gallery_images/wedding/wedding_1.JPG",
+      full: "/gallery_images/wedding/wedding_1.JPG",
+      category: "wedding",
+      title: "Wedding Image 1",
+      description: "An image from the wedding collection.",
+      width: 1920,
+      height: 1280,
+    },
+    {
+      id: "wedding-2",
+      src: "/gallery_images/wedding/wedding_2.JPG",
+      full: "/gallery_images/wedding/wedding_2.JPG",
+      category: "wedding",
+      title: "Wedding Image 2",
+      description: "An image from the wedding collection.",
+      width: 1920,
+      height: 1280,
+    },
+    {
+      id: "wedding-3",
+      src: "/gallery_images/wedding/wedding_3.JPG",
+      full: "/gallery_images/wedding/wedding_3.JPG",
+      category: "wedding",
+      title: "Wedding Image 3",
+      description: "An image from the wedding collection.",
+      width: 1920,
+      height: 1280,
+    },
+    {
+      id: "wedding-4",
+      src: "/gallery_images/wedding/wedding_4.JPG",
+      full: "/gallery_images/wedding/wedding_4.JPG",
+      category: "wedding",
+      title: "Wedding Image 3",
+      description: "An image from the wedding collection.",
+      width: 1920,
+      height: 1280,
+    },
+    {
+      id: "wedding-5",
+      src: "/gallery_images/wedding/wedding_5.JPG",
+      full: "/gallery_images/wedding/wedding_5.JPG",
+      category: "wedding",
+      title: "Wedding Image 3",
+      description: "An image from the wedding collection.",
+      width: 1920,
+      height: 1280,
+    },
+  ],
+  events: [
+    // {
+    //   id: "events-0",
+    //   src: "/gallery_images/events/event_1.JPG",
+    //   full: "/gallery_images/events/event_1.JPG",
+    //   category: "events",
+    //   title: "Event Image 1",
+    //   description: "An image from the events collection.",
+    //   width: 1920,
+    //   height: 1280,
+    // },
+    // {
+    //   id: "events-1",
+    //   src: "/gallery_images/events/event_2.JPG",
+    //   full: "/gallery_images/events/event_2.JPG",
+    //   category: "events",
+    //   title: "Event Image 2",
+    //   description: "An image from the events collection.",
+    //   width: 1920,
+    //   height: 1280,
+    // },
+    // {
+    //   id: "events-2",
+    //   src: "/gallery_images/events/event_3.JPG",
+    //   full: "/gallery_images/events/event_3.JPG",
+    //   category: "events",
+    //   title: "Event Image 3",
+    //   description: "An image from the events collection.",
+    //   width: 1920,
+    //   height: 1280,
+    // },
+  ],
+};
