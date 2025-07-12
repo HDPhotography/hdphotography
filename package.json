@@ -15,7 +15,7 @@
     "@fontsource/inter": "5",
     "@fontsource/playfair-display": "5",
     "aos": "2",
-    "astro": "4",
+    "astro": "^5.10.1",
     "masonry-layout": "4",
     "photoswipe": "5",
     "swiper": "11",
